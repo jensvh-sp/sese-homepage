@@ -1,0 +1,1295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SESE — Homepage v4</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+      <rect width="200" height="200" fill="#FAF5EC"/>
+      <rect x="0" y="0" width="200" height="22" fill="#3A7D94"/>
+      <text x="100" y="108" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="300" letter-spacing="6" fill="#1A1A1A">SESE</text>
+      <text x="100" y="138" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-style="italic" fill="#4A4A47">timeless skin, naturally yours</text>
+    </svg>
+  </template>
+  <link rel="stylesheet" href="../colors_and_type.css" />
+  <style>
+    /* ─── tokens local to v3 ──────────────────────────────────── */
+    :root {
+      --bg-page:        #FFFFFF;   /* white — primary surface (v4) */
+      --bg-nav:         #FAF5EC;   /* warm-white — SESE banner + footer (v4) */
+      --bg-elev:        #FFFCF5;   /* slightly lifted card surface */
+      --bg-sand:        #E8D5B0;   /* USP strip                    */
+      --bg-sand-soft:   #F1E6CC;
+      --bg-ice:         #C5DAEA;   /* Cleanse & Prep — Forever bundle */
+      --bg-ice-soft:    #E3EEF5;
+      --bg-mint:        #C5DDD0;   /* Tone */
+      --bg-peach:       #F5C98A;   /* Serums */
+      --bg-blush:       #F7D9DC;   /* Moisturisers */
+      --bg-lavender:    #DDDAEF;   /* Eye cream */
+      --bg-buttercup:   #EEED8A;   /* SPF stick */
+      --ink:            #1A1A1A;
+      --ink-2:          #4A4A47;
+      --ink-3:          #7A7770;
+      --line-soft:      rgba(26, 26, 26, 0.08);
+      --line-default:   rgba(26, 26, 26, 0.16);
+      --line-strong:    rgba(26, 26, 26, 0.28);
+      --blue:           #3A7D94;
+      --green:          #4E7A4E;
+      --radius-card:    18px;
+      --radius-soft:    10px;
+      --ease-out:       cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    html, body {
+      margin: 0; padding: 0;
+      background: #FFFFFF;
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+
+    .page { width: 1440px; margin: 0 auto; background: var(--bg-page); }
+    .nav-wrap { background: var(--bg-nav); }
+
+    /* ───────────────── Announcement bar ───────────────── */
+    .announce {
+      background: var(--blue);
+      color: #FFFCF5;
+      text-align: center;
+      padding: 11px 0;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .announce span { opacity: 0.9; }
+    .announce .dot { opacity: 0.45; margin: 0 16px; }
+
+    /* ───────────────── Nav ───────────────── */
+    .nav {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 26px 56px;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .nav .wordmark {
+      font-size: 26px;
+      letter-spacing: 0.34em;
+      color: var(--ink);
+    }
+    .nav-center {
+      display: inline-flex; gap: 36px;
+      font-size: 12px; letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .nav-center a {
+      position: relative;
+      padding: 6px 0;
+      transition: color .28s var(--ease-out);
+    }
+    .nav-center a::after {
+      content: ""; position: absolute; left: 50%; bottom: -2px;
+      transform: translateX(-50%);
+      width: 0; height: 1px; background: var(--ink);
+      transition: width .32s var(--ease-out);
+    }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-center a:hover::after,
+    .nav-center a.active::after { width: 22px; }
+    .nav-right {
+      display: flex; justify-content: flex-end; align-items: center;
+      gap: 22px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .nav-right .icon {
+      width: 22px; height: 22px;
+      display: inline-flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .nav-right .icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.25; }
+    .nav-right .cart {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--line-default);
+      border-radius: 999px;
+    }
+    .nav-right .cart .dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--blue);
+      display: inline-block;
+    }
+
+    /* ───────────────── Hero (full-bleed lifestyle photo + warm-white overlay) ───────────────── */
+    .hero {
+      position: relative;
+      margin: 18px 56px 0;
+      height: 720px;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        linear-gradient(155deg, #EBE2D0 0%, #D8C6A7 55%, #B59E80 100%);
+    }
+    /* placeholder texture for the lifestyle photo */
+    .hero .photo-placeholder {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.35) 0, transparent 36%),
+        radial-gradient(circle at 82% 70%, rgba(255,250,235,0.4) 0, transparent 40%),
+        radial-gradient(circle at 60% 30%, rgba(255,255,255,0.25) 0, transparent 30%),
+        repeating-linear-gradient(135deg, transparent 0 22px, rgba(255,255,255,0.05) 22px 23px);
+      pointer-events: none;
+    }
+    .hero .photo-tag {
+      position: absolute; top: 28px; left: 28px;
+      font-family: ui-monospace, Menlo, Monaco, monospace;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(26,26,26,0.55);
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.45);
+      border-radius: 999px;
+    }
+    /* warm-white overlay ~30% for legibility */
+    .hero .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(250,245,236,0.20) 0%, rgba(250,245,236,0.50) 100%);
+      pointer-events: none;
+    }
+    .hero .content {
+      position: relative; z-index: 2;
+      height: 100%;
+      padding: 96px 80px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      max-width: 880px;
+    }
+    .hero-eyebrow {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+      opacity: 0.75;
+    }
+    .hero-eyebrow::before {
+      content: ""; width: 24px; height: 1px; background: currentColor;
+    }
+    .hero h1 {
+      margin: 0;
+      font-size: 96px; line-height: 0.96; letter-spacing: -0.005em;
+      font-weight: 300;
+      color: var(--ink);
+    }
+    .hero h1 em {
+      font-style: italic;
+      letter-spacing: 0;
+    }
+    .hero .subtitle {
+      margin: 28px 0 0;
+      font-style: italic;
+      font-size: 22px; line-height: 1.4;
+      color: var(--ink);
+      opacity: 0.85;
+    }
+    .hero .lede {
+      margin: 22px 0 40px;
+      font-size: 17px; line-height: 1.6;
+      color: var(--ink);
+      max-width: 520px;
+      opacity: 0.78;
+    }
+    .hero-ctas { display: inline-flex; gap: 14px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 16px 28px;
+      font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background .32s var(--ease-out), color .32s var(--ease-out), border-color .32s var(--ease-out), transform .15s var(--ease-out);
+    }
+    .btn:active { transform: scale(0.985); }
+    .btn--primary { background: var(--blue); color: var(--bg-page); }
+    .btn--primary:hover { background: #2C6478; }
+    .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+    .btn--ghost:hover { border-color: var(--ink); background: rgba(26,26,26,0.03); }
+    .btn--blue-outline { background: transparent; color: var(--blue); border-color: var(--blue); }
+    .btn--blue-outline:hover { background: var(--blue); color: var(--bg-page); }
+    .btn--dark { background: var(--ink); color: var(--bg-page); }
+    .btn--dark:hover { background: #2A2A2A; }
+    .btn .arrow { font-size: 14px; line-height: 0; transform: translateY(-1px); }
+
+    /* Hero image — editorial product still (LEGACY — not used in v3 full-bleed hero) */
+    .hero-art {
+      position: relative;
+      height: 620px;
+      background: var(--bg-ice-soft);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+    .hero-art .swatch {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% 38%, #FFFFFF 0%, transparent 60%),
+        linear-gradient(180deg, #EAF1F6 0%, #C5DAEA 100%);
+    }
+    .hero-art .bottle {
+      position: absolute; left: 50%; bottom: 0;
+      transform: translateX(-50%);
+      height: 92%;
+      filter: drop-shadow(0 24px 32px rgba(26,26,26,0.15));
+    }
+    .hero-art .label {
+      position: absolute; top: 24px; left: 24px; right: 24px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ink);
+    }
+    .hero-art .label .right { text-align: right; }
+    .hero-art .pill {
+      position: absolute; left: 24px; bottom: 24px;
+      background: rgba(255,255,255,0.92);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink);
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .hero-art .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+    .hero-art .price-tag {
+      position: absolute; right: 24px; bottom: 24px;
+      background: var(--bg-page);
+      padding: 14px 18px;
+      border-radius: 14px;
+      box-shadow: 0 10px 28px rgba(26,26,26,0.12);
+      display: flex; align-items: center; gap: 14px;
+      cursor: pointer;
+      transition: transform .28s var(--ease-out);
+    }
+    .hero-art .price-tag:hover { transform: translateY(-2px); }
+    .hero-art .price-tag .name {
+      font-size: 14px; line-height: 1.2; color: var(--ink);
+    }
+    .hero-art .price-tag .price {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 3px;
+    }
+    .hero-art .price-tag .go {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--ink); color: var(--bg-page);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    /* ───────────────── USP strip ───────────────── */
+    .usps {
+      background: var(--bg-sand);
+      padding: 26px 56px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      border-radius: var(--radius-card);
+      margin: 28px 56px 0;
+    }
+    .usp {
+      display: flex; align-items: center; gap: 14px;
+      color: #2A2620;
+    }
+    .usp .ico {
+      width: 36px; height: 36px; flex: 0 0 36px;
+      border: 1px solid rgba(26,26,26,0.18); border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .usp .ico svg { width: 18px; height: 18px; stroke: #2A2620; fill: none; stroke-width: 1.25; }
+    .usp .t-top {
+      font-size: 13px; line-height: 1.25; letter-spacing: 0.01em; color: #2A2620;
+    }
+    .usp .t-sub {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(42,38,32,0.66);
+      margin-top: 2px;
+    }
+
+    /* ───────────────── Section header (shared) ───────────────── */
+    .sec-head {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: end;
+      padding: 0 56px;
+      margin: 112px 0 36px;
+      gap: 32px;
+    }
+    .sec-head .eyebrow {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sec-head .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .sec-head h2 {
+      margin: 0;
+      font-size: 52px; line-height: 1.02; letter-spacing: 0.005em;
+      font-weight: 300;
+      color: var(--ink);
+      max-width: 760px;
+    }
+    .sec-head h2 em { font-style: italic; }
+    .sec-head .head-aside {
+      display: flex; align-items: center; gap: 22px;
+      color: var(--ink-2);
+      font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+    }
+    .sec-head .head-aside a { border-bottom: 1px solid var(--line-default); padding-bottom: 3px; }
+    .sec-head .head-aside .arrows { display: inline-flex; gap: 8px; }
+    .sec-head .head-aside .arrows button {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid var(--line-default); background: transparent;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--ink); transition: background .28s var(--ease-out);
+    }
+    .sec-head .head-aside .arrows button:hover { background: var(--ink); color: var(--bg-page); }
+
+    /* ───────────────── Product carousel ───────────────── */
+    .carousel {
+      padding: 0 56px 0;
+      overflow: hidden;
+    }
+    .carousel-track {
+      display: grid;
+      grid-template-columns: repeat(9, 312px);
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 14px;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--line-default) transparent;
+    }
+    .carousel-track::-webkit-scrollbar { height: 6px; }
+    .carousel-track::-webkit-scrollbar-track { background: transparent; }
+    .carousel-track::-webkit-scrollbar-thumb { background: var(--line-default); border-radius: 999px; }
+
+    .card {
+      background: var(--bg-elev);
+      border-radius: var(--radius-card);
+      padding: 16px 16px 22px;
+      cursor: pointer;
+      transition: transform .42s var(--ease-out), box-shadow .42s var(--ease-out);
+      border: 1px solid var(--line-soft);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 40px -22px rgba(26,26,26,0.22);
+    }
+    .card .pic {
+      position: relative;
+      height: 340px;
+      border-radius: var(--radius-soft);
+      overflow: hidden;
+      background-position: center; background-repeat: no-repeat;
+      background-size: 70% auto;
+    }
+    .card .step {
+      position: absolute; top: 14px; left: 14px;
+      background: rgba(255,255,255,0.86);
+      padding: 6px 10px; border-radius: 999px;
+      font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .card .heart {
+      position: absolute; top: 14px; right: 14px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,255,255,0.86);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--ink-2);
+    }
+    .card .heart svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.4; }
+    .card .meta { padding: 18px 6px 0; }
+    .card .meta .name {
+      font-size: 19px; line-height: 1.2; color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .card .meta .tag {
+      font-size: 12px; line-height: 1.4; color: var(--ink-3);
+      max-width: 250px;
+    }
+    .card .meta .row {
+      margin-top: 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card .meta .price {
+      font-size: 16px; color: var(--ink);
+    }
+    .card .meta .add {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 9px 14px; border-radius: 999px;
+      border: 1px solid var(--line-default); color: var(--ink);
+      background: transparent; transition: background .28s var(--ease-out), color .28s var(--ease-out);
+    }
+    .card:hover .meta .add { background: var(--ink); color: var(--bg-page); border-color: var(--ink); }
+
+    /* ───────────────── About strip ───────────────── */
+    .about {
+      margin: 120px 56px 0;
+      padding: 64px 56px;
+      background: var(--bg-elev);
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius-card);
+      display: grid; grid-template-columns: 0.9fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about .visual {
+      position: relative;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius-soft);
+      overflow: hidden;
+      background: linear-gradient(160deg, #EBE2D0, #D8CBB3);
+    }
+    .about .visual .placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: ui-monospace, Menlo, Monaco, monospace;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(42, 38, 32, 0.55);
+      background:
+        repeating-linear-gradient(135deg, transparent 0 12px, rgba(255,255,255,0.18) 12px 13px);
+    }
+    .about .visual .caption {
+      position: absolute; left: 18px; bottom: 18px;
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(42,38,32,0.7);
+    }
+    .about .eyebrow {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3);
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px;
+    }
+    .about .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .about h3 {
+      margin: 0 0 26px;
+      font-size: 40px; line-height: 1.08; letter-spacing: 0.005em;
+      font-weight: 300; color: var(--ink);
+    }
+    .about p {
+      margin: 0 0 18px;
+      font-size: 17px; line-height: 1.7; color: var(--ink-2);
+      max-width: 560px;
+    }
+    .about p.sig {
+      margin-top: 28px;
+      font-style: italic; font-size: 15px; color: var(--ink-2);
+    }
+    .about .links {
+      margin-top: 36px;
+      display: inline-flex; gap: 12px;
+    }
+
+    /* ───────────────── The Forever Bundle (hero bundle) ───────────────── */
+    .forever {
+      margin: 120px 56px 0;
+      background: linear-gradient(155deg, #DCEAF1 0%, #B7D2DE 100%);
+      border-radius: 24px;
+      padding: 80px 80px;
+      display: grid; grid-template-columns: 1fr 1.05fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .forever::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 78% 18%, rgba(255,255,255,0.75), transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 100%, rgba(255,255,255,0.45), transparent 70%);
+      pointer-events: none;
+    }
+    .forever-text { position: relative; }
+    .forever .badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.7); backdrop-filter: blur(4px);
+      border-radius: 999px;
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: #1A3D4D;
+      margin-bottom: 26px;
+    }
+    .forever .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #1A3D4D; }
+    .forever h2 {
+      margin: 0 0 22px;
+      font-size: 76px; line-height: 0.98; letter-spacing: 0.005em;
+      font-weight: 300; color: #0F2A36;
+    }
+    .forever h2 em { font-style: italic; }
+    .forever p {
+      margin: 0 0 32px;
+      font-size: 17px; line-height: 1.65; color: #1A3D4D;
+      max-width: 460px;
+    }
+    .forever .pricing {
+      display: flex; align-items: baseline; gap: 18px;
+      margin-bottom: 32px;
+    }
+    .forever .pricing .now {
+      font-size: 38px; color: #0F2A36; letter-spacing: 0.01em;
+    }
+    .forever .pricing .was {
+      font-size: 17px; color: rgba(15,42,54,0.55); text-decoration: line-through;
+    }
+    .forever .pricing .save {
+      font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: #0F2A36;
+      background: rgba(255,255,255,0.6);
+      padding: 6px 10px; border-radius: 999px;
+    }
+    .forever .ctas { display: inline-flex; gap: 12px; }
+    .forever .btn--white {
+      background: var(--bg-page); color: var(--ink); border: 1px solid transparent;
+    }
+    .forever .btn--white:hover { background: #FFFFFF; }
+    .forever .btn--outline {
+      background: transparent; color: #0F2A36;
+      border: 1px solid rgba(15,42,54,0.35);
+    }
+    .forever .btn--outline:hover { background: rgba(255,255,255,0.4); }
+
+    .forever-art {
+      position: relative;
+      height: 460px;
+    }
+    .forever-art img {
+      position: absolute; bottom: 0;
+      max-height: 100%; object-fit: contain;
+    }
+    .forever-art .b1 { left: 0;   height: 78%; transform: rotate(-3deg); filter: drop-shadow(0 24px 28px rgba(15,42,54,0.18)); }
+    .forever-art .b2 { left: 18%; height: 92%; z-index: 2; filter: drop-shadow(0 30px 36px rgba(15,42,54,0.22)); }
+    .forever-art .b3 { left: 40%; height: 100%; z-index: 3; filter: drop-shadow(0 30px 36px rgba(15,42,54,0.24)); }
+    .forever-art .b4 { left: 62%; height: 86%; transform: rotate(4deg); filter: drop-shadow(0 24px 28px rgba(15,42,54,0.18)); }
+    .forever-art .b5 { left: 82%; height: 64%; transform: rotate(-2deg); filter: drop-shadow(0 18px 22px rgba(15,42,54,0.16)); }
+    .forever-art .count-chip {
+      position: absolute; top: 12px; right: 14px;
+      background: var(--bg-page);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink);
+      box-shadow: 0 8px 24px rgba(15,42,54,0.16);
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .forever-art .count-chip .num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--ink); color: var(--bg-page);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px;
+    }
+
+    /* ───────────────── Two ritual bundles (no copy — just photo + name) ───────────────── */
+    .rituals {
+      margin: 24px 56px 0;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .ritual {
+      position: relative;
+      border-radius: 22px;
+      padding: 28px 32px 26px;
+      min-height: 280px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .42s var(--ease-out), box-shadow .42s var(--ease-out);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .ritual:hover { transform: translateY(-3px); box-shadow: 0 30px 50px -30px rgba(26,26,26,0.28); }
+    .ritual--night {
+      background: linear-gradient(160deg, #2C3242 0%, #1A2030 100%);
+      color: #F1EBE0;
+    }
+    .ritual--full {
+      background: linear-gradient(160deg, #EAD6B7 0%, #D8BC93 100%);
+      color: #2A2620;
+    }
+    .ritual .head {
+      display: flex; flex-direction: column; gap: 10px;
+      align-self: flex-start;
+    }
+    .ritual .tag {
+      font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase;
+      opacity: 0.65;
+    }
+    .ritual h3 {
+      margin: 0;
+      font-size: 36px; line-height: 1.02; letter-spacing: 0.005em;
+      font-weight: 300;
+    }
+    .ritual h3 em { font-style: italic; }
+    .ritual .go {
+      align-self: flex-start;
+      margin-top: 14px;
+      width: 42px; height: 42px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      transition: transform .32s var(--ease-out);
+    }
+    .ritual:hover .go { transform: translateX(4px) translateY(-4px); }
+    .ritual--night .go { background: rgba(255,255,255,0.12); color: #F1EBE0; }
+    .ritual--full  .go { background: rgba(42,38,32,0.12); color: #2A2620; }
+    .ritual .bottles {
+      position: relative;
+      height: 220px;
+      align-self: stretch;
+    }
+    .ritual .bottles img {
+      position: absolute; bottom: 0;
+      max-height: 100%; object-fit: contain;
+    }
+    .ritual--night .bottles img { filter: drop-shadow(0 14px 18px rgba(0,0,0,0.4)); }
+    .ritual--full  .bottles img { filter: drop-shadow(0 14px 18px rgba(42,38,32,0.18)); }
+
+    /* night bottles — stacked composition */
+    .ritual--night .b1 { left: 0;   height: 80%; transform: rotate(-3deg); }
+    .ritual--night .b2 { left: 22%; height: 100%; z-index: 2; }
+    .ritual--night .b3 { left: 50%; height: 92%; z-index: 1; transform: rotate(3deg); }
+    .ritual--night .b4 { left: 76%; height: 78%; transform: rotate(-2deg); }
+
+    /* full bottles — stacked composition */
+    .ritual--full .b1 { left: 0;   height: 72%; transform: rotate(-3deg); }
+    .ritual--full .b2 { left: 18%; height: 88%; z-index: 1; }
+    .ritual--full .b3 { left: 38%; height: 100%; z-index: 3; }
+    .ritual--full .b4 { left: 60%; height: 90%; z-index: 2; transform: rotate(2deg); }
+    .ritual--full .b5 { left: 80%; height: 76%; transform: rotate(-1deg); }
+
+    /* ───────────────── Blog teaser — most recent post, beginning with "…" link ───────────────── */
+    .blog-head { margin-top: 128px; }
+
+    .journal {
+      margin: 0 56px;
+      background: var(--bg-elev);
+      border: 1px solid var(--line-soft);
+      border-radius: 24px;
+      padding: 28px;
+      display: grid; grid-template-columns: 1.05fr 1fr;
+      gap: 56px;
+      align-items: stretch;
+    }
+    .journal .cover {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      min-height: 460px;
+      background: linear-gradient(160deg, #E5DCC4 0%, #CFC1A0 100%);
+    }
+    .journal .cover .ph {
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,255,255,0.16) 18px 19px);
+      display: flex; align-items: center; justify-content: center;
+      font-family: ui-monospace, Menlo, Monaco, monospace;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(26,26,26,0.45);
+    }
+    .journal .cover .meta-top {
+      position: absolute; top: 22px; left: 22px; right: 22px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(26,26,26,0.65);
+    }
+    .journal .cover .meta-top .pill {
+      background: rgba(255,255,255,0.7);
+      padding: 6px 12px; border-radius: 999px;
+    }
+    .journal .body {
+      padding: 28px 24px 28px 12px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .journal .body .eb {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 22px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .journal .body .eb::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .journal .body h3 {
+      margin: 0 0 22px;
+      font-size: 38px; line-height: 1.06; letter-spacing: 0.005em;
+      font-weight: 300; color: var(--ink);
+    }
+    .journal .body h3 em { font-style: italic; }
+    .journal .body .excerpt {
+      font-size: 16px; line-height: 1.75; color: var(--ink-2);
+      max-width: 520px;
+      margin: 0;
+      /* fade-out trick on last lines */
+      mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
+    }
+    .journal .body .excerpt p { margin: 0 0 14px; }
+    .journal .body .ellipsis {
+      margin-top: 6px;
+      font-size: 22px; letter-spacing: 0.28em; color: var(--ink-3);
+    }
+    .journal .body .more {
+      margin-top: 24px;
+      display: inline-flex; align-items: center; gap: 14px;
+      font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink);
+    }
+    .journal .body .more .arc {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--line-default);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      transition: all .28s var(--ease-out);
+    }
+    .journal:hover .body .more .arc { background: var(--ink); color: var(--bg-page); border-color: var(--ink); }
+
+    .journal-foot {
+      margin: 22px 56px 0;
+      padding: 22px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+      font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .journal-foot a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--line-default);
+      padding-bottom: 3px;
+    }
+
+    /* ───────────────── Footer ───────────────── */
+    .foot-wrap {
+      margin-top: 96px;
+      background: var(--bg-nav);
+      color: #2A2620;
+    }
+    .foot-top {
+      padding: 80px 56px 56px;
+      display: grid;
+      grid-template-columns: 1.2fr 1px 1fr 1px 1fr;
+      gap: 48px;
+      align-items: stretch;
+    }
+    .foot-divider {
+      width: 1px;
+      background: rgba(42,38,32,0.22);
+      align-self: center;
+      height: 60%;
+    }
+    .foot-col h5 {
+      margin: 0 0 22px;
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: rgba(42, 38, 32, 0.6);
+      font-weight: 300;
+    }
+    .foot-brand .wm {
+      font-size: 30px; letter-spacing: 0.34em; color: #2A2620;
+      margin-bottom: 18px;
+    }
+    .foot-brand .tag {
+      font-style: italic;
+      font-size: 18px; line-height: 1.5; color: #2A2620;
+      max-width: 360px;
+      margin-bottom: 32px;
+    }
+    .foot-brand .contact {
+      font-size: 14px; line-height: 1.75; color: #2A2620;
+    }
+    .foot-brand .contact a { border-bottom: 1px solid rgba(42,38,32,0.25); }
+    .foot-brand .contact a:hover { border-bottom-color: #2A2620; }
+    .foot-brand .socials {
+      margin-top: 24px;
+      display: inline-flex; gap: 10px;
+    }
+    .foot-brand .socials .circ {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid rgba(42,38,32,0.25);
+      display: inline-flex; align-items: center; justify-content: center;
+      transition: background .28s var(--ease-out), color .28s var(--ease-out);
+    }
+    .foot-brand .socials .circ svg { width: 16px; height: 16px; stroke: #2A2620; fill: none; stroke-width: 1.4; }
+    .foot-brand .socials .circ:hover { background: #2A2620; }
+    .foot-brand .socials .circ:hover svg { stroke: var(--bg-page); }
+    .foot-col ul { list-style: none; margin: 0; padding: 0; }
+    .foot-col li {
+      padding: 6px 0;
+      font-size: 15px; color: #2A2620;
+      transition: opacity .28s var(--ease-out);
+    }
+    .foot-col li a:hover { opacity: 0.6; }
+
+    .newsletter {
+      margin-top: 6px;
+      display: flex; align-items: center;
+      border-bottom: 1px solid rgba(42,38,32,0.3);
+      padding-bottom: 10px;
+      max-width: 320px;
+    }
+    .newsletter input {
+      flex: 1;
+      background: transparent; border: 0; outline: 0;
+      font-family: var(--font-display); font-weight: 300;
+      font-size: 14px; color: #2A2620;
+    }
+    .newsletter input::placeholder { color: rgba(42,38,32,0.5); }
+    .newsletter button {
+      background: transparent; border: 0; padding: 0;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: #2A2620;
+    }
+    .foot-bot {
+      border-top: 1px solid rgba(42,38,32,0.2);
+      padding: 24px 56px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(42,38,32,0.7);
+    }
+    .pay {
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .pay .chip {
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(42,38,32,0.18);
+      border-radius: 6px;
+      font-size: 10px; letter-spacing: 0.18em;
+      color: #2A2620;
+      font-family: var(--font-ui);
+      font-weight: 500;
+    }
+    .lang-foot {
+      display: inline-flex; gap: 10px; align-items: center;
+    }
+    .lang-foot span.sep { opacity: 0.4; }
+  </style>
+</head>
+<body>
+  <div class="page" data-screen-label="01 Homepage v4">
+
+    <!-- ─────── Announcement bar ─────── -->
+    <div class="announce">
+      <span>Free shipping over €100</span>
+      <span class="dot">·</span>
+      <span>All products COSMOS Natural Certified · Vegan</span>
+    </div>
+
+    <!-- ─────── Nav ─────── -->
+    <header class="nav" data-screen-label="01.1 Nav">
+      <a href="Homepage v3.html" class="wordmark">S E S E</a>
+      <nav class="nav-center">
+        <a class="active">Shop</a>
+        <a>Routines</a>
+        <a>Cleanse &amp; Prep</a>
+        <a>Serums</a>
+        <a>Moisturize</a>
+        <a>About</a>
+      </nav>
+      <div class="nav-right">
+        <span class="icon" title="Search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        </span>
+        <span>EN · NL · FR</span>
+        <a href="Product page v3.html" class="cart">
+          <span class="dot"></span>
+          <span>Cart · 2</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ─────── Hero (full-bleed lifestyle photo + warm-white overlay) ─────── -->
+    <section class="hero" data-screen-label="01.2 Hero">
+      <div class="photo-placeholder"></div>
+      <span class="photo-tag">[hero photo — bottles in botanical setting · golden hour · from Drive folder]</span>
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="hero-eyebrow">Anti-aging skincare · Beach &amp; botanical</div>
+        <h1 style="font-size: 80px">
+          Unlock your skin's<br/>
+          <em>timeless beauty.</em>
+        </h1>
+        <p class="subtitle">Timeless skin, naturally yours.</p>
+        <p class="lede">
+          Care for your skin with intention, softness, and the right foundation.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn btn--primary">Shop Now <span class="arrow">→</span></button>
+          <button class="btn btn--blue-outline">Discover your routine</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────── USP strip ─────── -->
+    <section class="usps" data-screen-label="01.3 USPs">
+      <div class="usp">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3c-3 3-5 6-5 9a5 5 0 0010 0c0-3-2-6-5-9z"/><path d="M8 14c1 1 2 1.6 4 1.6"/></svg></span>
+        <div>
+          <div class="t-top">COSMOS Natural</div>
+          <div class="t-sub">Certified formulas</div>
+        </div>
+      </div>
+      <div class="usp">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 4c2 2 3 4 3 6a3 3 0 11-6 0c0-2 1-4 3-6z"/><path d="M9 14h6M8 17h8M10 20h4"/></svg></span>
+        <div>
+          <div class="t-top">Vegan &amp; cruelty-free</div>
+          <div class="t-sub">Every formula, every batch</div>
+        </div>
+      </div>
+      <div class="usp">
+        <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="13" height="9" rx="1.5"/><path d="M16 10h3l2 3v3h-5"/><circle cx="7" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/></svg></span>
+        <div>
+          <div class="t-top">Free shipping over €100</div>
+          <div class="t-sub">Dispatched from EU</div>
+        </div>
+      </div>
+      <div class="usp">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.2 6.8H21l-5.6 4 2.2 6.7L12 16.6 6.4 20.5 8.6 13.8 3 9.8h6.8z"/></svg></span>
+        <div>
+          <div class="t-top">Developed by a Skin Expert</div>
+          <div class="t-sub">Honest, professional care</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────── Product carousel ─────── -->
+    <div class="sec-head" data-screen-label="01.4 Essentials">
+      <div>
+        <div class="eyebrow">Discover your essentials</div>
+      </div>
+      <div class="head-aside">
+        <a>Shop all</a>
+        <div class="arrows">
+          <button id="prev" aria-label="Previous">‹</button>
+          <button id="next" aria-label="Next">›</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel">
+      <div class="carousel-track" id="track">
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#E3EEF5; background-image:url('../assets/products/cleansing-foam-front-alt.jpg');">
+            <span class="step">Step 01 · Cleanse</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Cleansing Foam</div>
+            <div class="tag">Gentle gel-to-foam. Cleans without stripping.</div>
+            <div class="row"><span class="price">€26</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#E6EFE9; background-image:url('../assets/products/hydrating-toner-front-alt.jpg');">
+            <span class="step">Step 02 · Tone</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Hydrating Toner</div>
+            <div class="tag">Weightless mist. Preps skin to drink deeper.</div>
+            <div class="row"><span class="price">€28</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#FCEAD0; background-image:url('../assets/products/vitamin-c-serum-front-alt.jpg');">
+            <span class="step">Step 03 · Treat · AM</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Vitamin C Serum</div>
+            <div class="tag">Brightens. Evens. Wakes the morning skin.</div>
+            <div class="row"><span class="price">€44</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#FCEAD0; background-image:url('../assets/products/peptide-serum-front.jpg');">
+            <span class="step">Step 03 · Treat · AM/PM</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Peptide Serum</div>
+            <div class="tag">Firms, smooths, supports skin elasticity.</div>
+            <div class="row"><span class="price">€48</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#FCEAD0; background-image:url('../assets/products/retinol-alt-serum-front.jpg');">
+            <span class="step">Step 03 · Treat · PM</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Retinol Alternative Serum</div>
+            <div class="tag">Renews without irritation. Sensitive skin welcome.</div>
+            <div class="row"><span class="price">€48</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#FCE8EB; background-image:url('../assets/products/firming-day-cream-front.jpg');">
+            <span class="step">Step 04 · Moisturise · AM</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Anti-Age Day Cream</div>
+            <div class="tag">Hydrates, firms, protects all day long.</div>
+            <div class="row"><span class="price">€42</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#FCE8EB; background-image:url('../assets/products/ceramide-night-cream-front-alt.jpg');">
+            <span class="step">Step 05 · Moisturise · PM</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Ceramide Night Cream</div>
+            <div class="tag">Repairs, nourishes, restores overnight.</div>
+            <div class="row"><span class="price">€44</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#EBE9F5; background-image:url('../assets/products/smoothing-eye-cream-front.jpg');">
+            <span class="step">Targeted · Eye</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">Smoothing Eye Cream</div>
+            <div class="tag">Reduces fatigue. Smooths fine lines.</div>
+            <div class="row"><span class="price">€36</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+
+        <a class="card" href="Product page v3.html">
+          <div class="pic" style="background-color:#FAF7C9; background-image:url('../assets/products/spf50-stick-front.jpg');">
+            <span class="step">Step · Protect</span>
+            <span class="heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
+          </div>
+          <div class="meta">
+            <div class="name">SPF 50 Sunscreen Stick</div>
+            <div class="tag">Mineral-based defence in a pocket stick.</div>
+            <div class="row"><span class="price">€32</span><button class="add">Add <span>+</span></button></div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ─────── About strip ─────── -->
+    <section class="about" data-screen-label="01.5 About">
+      <div class="visual">
+        <div class="placeholder">[founder portrait — natural light]</div>
+        <span class="caption">Séphora Mfulu · Founder</span>
+      </div>
+      <div>
+        <div class="eyebrow">Our story</div>
+        <h3>I know what it feels like to search<br/>— really search — for something<br/>that finally works.</h3>
+        <p>
+          For years, my own skin was my biggest frustration. I tried everything, trusted too many
+          labels, and felt lost in an industry that made everything more complicated than it
+          needed to be.
+        </p>
+        <p>
+          SESE was born from that search. From the belief that your skin deserves honest care —
+          not quick fixes or empty promises. And that true beauty has no expiry date.
+        </p>
+        <p>
+          At every age, you deserve to feel like yourself. Radiant, cared for,
+          and completely at ease in your own skin.
+        </p>
+        <p class="sig">— Séphora, founder of SESE</p>
+        <div class="links">
+          <button class="btn btn--dark">Read our story <span class="arrow">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────── The Forever Bundle ─────── -->
+    <section class="forever" data-screen-label="01.6 The Forever Bundle">
+      <div class="forever-text">
+        <span class="badge"><span class="dot"></span>Best value · Anti-aging · 5 steps</span>
+        <h2>The Forever<br/><em>Bundle.</em></h2>
+        <p>
+          Five morning essentials, one timeless ritual.
+          Everything your skin needs to start the day — cleanse, hydrate, firm and protect.
+        </p>
+        <div class="pricing">
+          <span class="now">€168</span>
+          <span class="was">€186</span>
+          <span class="save">Save €18</span>
+        </div>
+        <div class="ctas">
+          <button class="btn btn--white">Start your routine <span class="arrow">→</span></button>
+          <button class="btn btn--outline">What's inside?</button>
+        </div>
+      </div>
+      <div class="forever-art">
+        <span class="count-chip"><span class="num">5</span>products · one box</span>
+        <img class="b1" src="../assets/products/cleansing-foam-front-alt.jpg" alt="Cleansing Foam" />
+        <img class="b2" src="../assets/products/hydrating-toner-front-alt.jpg" alt="Hydrating Toner" />
+        <img class="b3" src="../assets/products/peptide-serum-front.jpg" alt="Peptide Serum" />
+        <img class="b4" src="../assets/products/firming-day-cream-front.jpg" alt="Firming Day Cream" />
+        <img class="b5" src="../assets/products/spf50-stick-front.jpg" alt="SPF 50 Stick" />
+      </div>
+    </section>
+
+    <!-- ─────── Two ritual bundles — minimal, no descriptions ─────── -->
+    <section class="rituals" data-screen-label="01.7 Ritual bundles">
+      <a class="ritual ritual--night">
+        <div class="head">
+          <span class="tag">Night ritual</span>
+          <h3>The Beauty<br/><em>Sleep Ritual.</em></h3>
+          <span class="go">→</span>
+        </div>
+        <div class="bottles">
+          <img class="b1" src="../assets/products/cleansing-foam-front-alt.jpg" alt="" />
+          <img class="b2" src="../assets/products/retinol-alt-serum-front.jpg" alt="" />
+          <img class="b3" src="../assets/products/smoothing-eye-cream-front.jpg" alt="" />
+          <img class="b4" src="../assets/products/ceramide-night-cream-front-alt.jpg" alt="" />
+        </div>
+      </a>
+
+      <a class="ritual ritual--full">
+        <div class="head">
+          <span class="tag">Complete edit</span>
+          <h3>The Full<br/><em>Ritual.</em></h3>
+          <span class="go">→</span>
+        </div>
+        <div class="bottles">
+          <img class="b1" src="../assets/products/cleansing-foam-front-alt.jpg" alt="" />
+          <img class="b2" src="../assets/products/hydrating-toner-front-alt.jpg" alt="" />
+          <img class="b3" src="../assets/products/peptide-serum-front.jpg" alt="" />
+          <img class="b4" src="../assets/products/firming-day-cream-front.jpg" alt="" />
+          <img class="b5" src="../assets/products/spf50-stick-front.jpg" alt="" />
+        </div>
+      </a>
+    </section>
+
+    <!-- ─────── Journal (single most-recent post, beginning + …) ─────── -->
+    <div class="sec-head blog-head" data-screen-label="01.8 The Journal">
+      <div>
+        <div class="eyebrow">From the journal</div>
+        <h2>The latest <em>read.</em></h2>
+      </div>
+      <div class="head-aside">
+        <a>All articles →</a>
+      </div>
+    </div>
+
+    <a class="journal" href="#">
+      <div class="cover">
+        <div class="ph">[journal cover — hands &amp; serum · golden hour]</div>
+        <div class="meta-top">
+          <span class="pill">Most recent</span>
+          <span>May 11, 2026 · 7 min read</span>
+        </div>
+      </div>
+      <div class="body">
+        <div class="eb">Ritual · Five-minute skin</div>
+        <h3>Five minutes that feel like yours<br/>— <em>building a routine you'll actually keep.</em></h3>
+        <div class="excerpt">
+          <p>Most routines collapse in week two. Not because the products fail, but because the rhythm asks too much of a tired evening.</p>
+          <p>The SESE ritual was designed around that quiet truth. Five steps. One morning, one evening. Five minutes that fit the life you already have — not the one a marketing campaign hopes you'd like to be living.</p>
+          <p>Begin with the smallest, slowest layer…</p>
+        </div>
+        <div class="ellipsis">…</div>
+        <span class="more">Continue reading on the journal <span class="arc">→</span></span>
+      </div>
+    </a>
+
+    <div class="journal-foot">
+      <span>Also recent in the journal</span>
+      <span><a>What peptides actually do (and don't) →</a></span>
+      <span><a>Aging on your own terms →</a></span>
+      <span><a>Visit the journal →</a></span>
+    </div>
+  </div>
+
+  <!-- ─────── Footer (3 columns) ─────── -->
+  <footer class="foot-wrap" data-screen-label="01.10 Footer">
+    <div class="page">
+      <div class="foot-top">
+        <div class="foot-col foot-brand">
+          <div class="wm">S E S E</div>
+          <div class="tag">Unlock your skin's <em>timeless beauty.</em></div>
+          <div class="contact">
+            <a href="mailto:customerservice@sese.be">customerservice@sese.be</a>
+          </div>
+          <div class="socials">
+            <a class="circ" title="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg></a>
+            <a class="circ" title="Facebook"><svg viewBox="0 0 24 24"><path d="M14 4h-2a3 3 0 00-3 3v3H7v3h2v8h3v-8h2.5l.5-3H12V7a1 1 0 011-1h2V4z"/></svg></a>
+            <a class="circ" title="Pinterest"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M11 7c2 0 4 1.5 4 4s-1.5 4-3.5 4c-.8 0-1.5-.4-1.7-1l-.5 2.5L8 21"/></svg></a>
+          </div>
+          <div style="margin-top: 28px;">
+            <h5 style="margin-bottom:10px;">Newsletter</h5>
+            <form class="newsletter" onsubmit="event.preventDefault();">
+              <input type="email" placeholder="Your email" />
+              <button type="submit">Subscribe →</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="foot-divider"></div>
+
+        <div class="foot-col">
+          <h5>Klantenservice</h5>
+          <ul>
+            <li><a>FAQ</a></li>
+            <li><a>Blog</a></li>
+            <li><a>Shipping &amp; Delivery</a></li>
+            <li><a>Returns &amp; Refunds</a></li>
+            <li><a>Track my order</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-divider"></div>
+
+        <div class="foot-col">
+          <h5>Beleid &amp; info</h5>
+          <ul>
+            <li><a>About Us</a></li>
+            <li><a>Privacy Policy</a></li>
+            <li><a>Terms &amp; Conditions</a></li>
+            <li><a>Right of Withdrawal</a></li>
+            <li><a>Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-bot">
+        <div>© 2026 SESE · Based in Belgium</div>
+        <div class="pay">
+          <span class="chip">VISA</span>
+          <span class="chip">Mastercard</span>
+          <span class="chip">Bancontact</span>
+          <span class="chip">PayPal</span>
+          <span class="chip">Apple&nbsp;Pay</span>
+        </div>
+        <div class="lang-foot">
+          <span>NL</span><span class="sep">·</span><span style="color:#2A2620;">EN</span><span class="sep">·</span><span>FR</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Carousel arrows
+    (function(){
+      const track = document.getElementById('track');
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      const step = 332; // card width + gap
+      prev && prev.addEventListener('click', () => track.scrollBy({ left: -step, behavior: 'smooth' }));
+      next && next.addEventListener('click', () => track.scrollBy({ left:  step, behavior: 'smooth' }));
+    })();
+  </script>
+</body>
+</html>

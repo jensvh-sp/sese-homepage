@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SESE — Homepage & Product Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../colors_and_type.css" />
+  <style>
+    html, body { margin: 0; background: #EDE6D7; font-family: var(--font-display); font-weight: 300; }
+    /* Inside-artboard styles */
+    button { font-family: var(--font-display); cursor: pointer; }
+    img { display: block; }
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Reuse the kit's product data + the homepage section components -->
+  <script src="../ui_kits/webshop/data.js"></script>
+  <script>
+    /* Rewrite the kit's relative product image paths so they resolve from /designs/ */
+    window.SESE_PRODUCTS = window.SESE_PRODUCTS.map(p => ({
+      ...p,
+      img: p.img.replace("../../assets/", "../assets/"),
+      studio: p.studio.replace("../../assets/", "../assets/")
+    }));
+  </script>
+  <script type="text/babel" src="../ui_kits/webshop/Chrome.jsx"></script>
+  <script type="text/babel" src="../ui_kits/webshop/Sections.jsx"></script>
+
+  <script type="text/babel" src="PDP.jsx"></script>
+  <script type="text/babel" src="HomeMobile.jsx"></script>
+  <script type="text/babel" src="design-canvas.jsx"></script>
+
+  <script type="text/babel">
+    const { useEffect } = React;
+    const products = window.SESE_PRODUCTS;
+    const peptide = products.find(p => p.id === "peptide-serum");
+
+    function HomeDesktop() {
+      return (
+        <div style={{ width: 1440, background: "var(--sese-warm-white)", color: "var(--sese-ink)" }}>
+          <AnnouncementBar />
+          <Nav onNav={()=>{}} current="home" />
+          <Hero onCta={()=>{}} />
+          <RoutineFlow />
+          <ProductGrid products={products} onOpen={()=>{}} />
+          <StarterBundle products={products} onCta={()=>{}} />
+          <DayVsNight products={products} />
+          <Ingredients />
+          <StorySection />
+          <Trust />
+          <FaqPreview onNav={()=>{}} />
+          <FinalCta onCta={()=>{}} />
+          <Footer />
+        </div>
+      );
+    }
+
+    function PDPEditorialDesktop() {
+      return <div style={{ width: 1440 }}><PDPEditorial p={peptide} /></div>;
+    }
+    function PDPClinicalDesktop() {
+      return <div style={{ width: 1440 }}><PDPClinical p={peptide} /></div>;
+    }
+
+    function App() {
+      return (
+        <DesignCanvas title="SESE — Homepage & Product Page" subtitle="Iteration · Peptide Serum · Editorial vs Clinical">
+          <DCSection id="home" title="Homepage">
+            <DCArtboard id="home-desktop" label="Desktop · 1440px" width={1440} height={6400}>
+              <HomeDesktop />
+            </DCArtboard>
+            <DCArtboard id="home-mobile" label="Mobile · 390px" width={390} height={2600}>
+              <HomeMobile products={products} />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="pdp-editorial" title="Product page · Editorial">
+            <DCArtboard id="pdp-ed-desktop" label="Desktop · 1440px" width={1440} height={2200}>
+              <PDPEditorialDesktop />
+            </DCArtboard>
+            <DCArtboard id="pdp-ed-mobile" label="Mobile · 390px" width={390} height={1500}>
+              <PDPEditorialMobile p={peptide} />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="pdp-clinical" title="Product page · Clinical">
+            <DCArtboard id="pdp-cl-desktop" label="Desktop · 1440px" width={1440} height={1200}>
+              <PDPClinicalDesktop />
+            </DCArtboard>
+            <DCArtboard id="pdp-cl-mobile" label="Mobile · 390px" width={390} height={1400}>
+              <PDPClinicalMobile p={peptide} />
+            </DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

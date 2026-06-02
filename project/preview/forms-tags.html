@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:32px;background:var(--bg-primary);font-family:var(--font-display);font-weight:300;color:var(--fg-primary);display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+  .input{display:flex;flex-direction:column;gap:6px;flex:1;min-width:240px}
+  .label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--fg-muted)}
+  .field{font-family:var(--font-display);font-weight:300;font-size:16px;border:none;border-bottom:1px solid var(--line-default);padding:10px 0;background:transparent;outline:none;color:var(--fg-primary)}
+  .field:focus{border-bottom-color:var(--sese-blue)}
+  .tag{display:inline-flex;padding:6px 14px;border-radius:999px;border:1px solid var(--line-default);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-secondary);background:transparent}
+  .tag.active{background:var(--sese-ink);color:var(--sese-warm-white);border-color:var(--sese-ink)}
+  .tags{display:flex;gap:8px;flex-wrap:wrap}
+</style></head>
+<body>
+  <div class="input"><span class="label">Email</span><input class="field" placeholder="you@example.com" value=""></div>
+  <div style="flex:1;min-width:240px">
+    <div class="label" style="margin-bottom:10px">Skin type</div>
+    <div class="tags">
+      <span class="tag active">All</span>
+      <span class="tag">Dry</span>
+      <span class="tag">Combination</span>
+      <span class="tag">Sensitive</span>
+    </div>
+  </div>
+</body></html>

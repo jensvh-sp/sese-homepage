@@ -1,0 +1,254 @@
+/* SESE Design System — Colors & Type
+ * Beach & Botanical Anti-Aging Skincare
+ */
+
+@font-face {
+  font-family: "Todes";
+  src: url("fonts/Todes-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Core brand palette ─────────────────────────────────── */
+  --sese-blue:        #3A7D94;   /* Soft sea blue   */
+  --sese-green:       #4E7A4E;   /* Botanical green */
+  --sese-sand:        #E8D5B0;   /* Warm sand       */
+  --sese-warm-white:  #FAF5EC;   /* Warm white — primary surface */
+  --sese-ink:         #1A1A1A;   /* Dark text — never pure black on bg */
+
+  /* ── Extended naturals (derived, soft) ──────────────────── */
+  --sese-sand-50:     #F5EBD6;
+  --sese-sand-100:    #EFDFC2;
+  --sese-sand-200:    #E8D5B0;   /* alias of sand */
+  --sese-sand-300:    #D9BE8E;
+  --sese-sand-700:    #8B7351;
+
+  --sese-blue-50:     #E6EEF2;
+  --sese-blue-100:    #C5DAEA;   /* ice-blue accent (Cleanse & Prep) */
+  --sese-blue-300:    #7AA9BD;
+  --sese-blue-500:    #3A7D94;   /* alias of blue */
+  --sese-blue-700:    #2A5C70;
+
+  --sese-green-50:    #E6EDE6;
+  --sese-green-100:    #C9D7C9;
+  --sese-green-300:   #88A488;
+  --sese-green-500:   #4E7A4E;   /* alias of green */
+  --sese-green-700:   #355535;
+
+  /* Packaging accents (from product photography) */
+  --sese-peach:       #F4C9A8;   /* serum labels */
+  --sese-blush:       #E9B7A8;   /* day cream */
+  --sese-clay:        #D8A48F;   /* bottle bodies */
+
+  /* ── Semantic surfaces ──────────────────────────────────── */
+  --bg-primary:        var(--sese-warm-white);
+  --bg-elevated:       #FFFCF5;
+  --bg-sand:           var(--sese-sand);
+  --bg-sand-soft:      var(--sese-sand-50);
+  --bg-blue-soft:      var(--sese-blue-50);
+  --bg-green-soft:     var(--sese-green-50);
+  --bg-ink:            #1A1A1A;
+  --bg-overlay:        rgba(26, 26, 26, 0.45);
+
+  /* ── Semantic text ──────────────────────────────────────── */
+  --fg-primary:        var(--sese-ink);
+  --fg-secondary:      #4A4A47;
+  --fg-muted:          #7A7770;
+  --fg-on-dark:        var(--sese-warm-white);
+  --fg-on-sand:        #2A2620;
+  --fg-link:           var(--sese-blue);
+
+  /* ── Borders / lines ────────────────────────────────────── */
+  --line-soft:         rgba(26, 26, 26, 0.08);
+  --line-default:      rgba(26, 26, 26, 0.16);
+  --line-strong:       rgba(26, 26, 26, 0.28);
+  --line-on-dark:      rgba(250, 245, 236, 0.18);
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-display: "Todes", "Cormorant Garamond", "Times New Roman", serif;
+  --font-body:    "Todes", "Cormorant Garamond", "Times New Roman", serif;
+  --font-ui:      "Inter", "Helvetica Neue", system-ui, sans-serif;
+
+  /* Weights */
+  --fw-light:    300;
+  --fw-regular:  400;
+
+  /* Tracking */
+  --tracking-display:  0.18em;   /* SESE wordmark / hero       */
+  --tracking-eyebrow:  0.32em;   /* category labels, eyebrows  */
+  --tracking-button:   0.22em;   /* primary CTAs               */
+  --tracking-body:     0.01em;
+  --tracking-tight:    0;
+
+  /* Type scale (1.25 ratio · editorial) */
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-md:   18px;
+  --text-lg:   22px;
+  --text-xl:   28px;
+  --text-2xl:  36px;
+  --text-3xl:  48px;
+  --text-4xl:  64px;
+  --text-5xl:  88px;
+  --text-6xl:  120px;
+
+  --leading-tight:  1.05;
+  --leading-snug:   1.2;
+  --leading-body:   1.55;
+  --leading-loose:  1.75;
+
+  /* ── Spacing (8pt base) ─────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ── Radii (gentle, never sharp) ────────────────────────── */
+  --r-xs:  2px;
+  --r-sm:  4px;
+  --r-md:  8px;
+  --r-lg:  16px;
+  --r-pill: 999px;
+
+  /* ── Shadows (whispered, not dramatic) ──────────────────── */
+  --shadow-soft:   0 1px 2px rgba(26, 26, 26, 0.04), 0 8px 24px rgba(26, 26, 26, 0.05);
+  --shadow-lift:   0 2px 6px rgba(26, 26, 26, 0.06), 0 18px 40px rgba(26, 26, 26, 0.08);
+  --shadow-sand:   0 12px 32px rgba(139, 115, 81, 0.12);
+
+  /* ── Motion ─────────────────────────────────────────────── */
+  --ease-out:    cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:    160ms;
+  --dur-base:    280ms;
+  --dur-slow:    520ms;
+  --dur-page:    820ms;
+}
+
+/* ── Type primitives ─────────────────────────────────────── */
+
+.sese-eyebrow {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.sese-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  font-size: var(--text-5xl);
+  line-height: var(--leading-tight);
+  letter-spacing: 0.02em;
+  color: var(--fg-primary);
+}
+
+.sese-h1 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-tight);
+  letter-spacing: 0.01em;
+}
+
+.sese-h2 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  letter-spacing: 0.01em;
+}
+
+.sese-h3 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xl);
+  line-height: var(--leading-snug);
+}
+
+.sese-body {
+  font-family: var(--font-body);
+  font-weight: var(--fw-light);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color: var(--fg-secondary);
+}
+
+.sese-caption {
+  font-family: var(--font-body);
+  font-weight: var(--fw-light);
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+}
+
+.sese-wordmark {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+
+.sese-btn {
+  font-family: var(--font-display);
+  font-weight: var(--fw-light);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-button);
+  text-transform: uppercase;
+  padding: 16px 28px;
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.sese-btn--primary {
+  background: var(--sese-ink);
+  color: var(--sese-warm-white);
+}
+.sese-btn--primary:hover { background: #2E2E2E; }
+.sese-btn--primary:active { transform: scale(0.98); }
+
+.sese-btn--ghost {
+  background: transparent;
+  color: var(--sese-ink);
+  border-color: var(--line-strong);
+}
+.sese-btn--ghost:hover { border-color: var(--sese-ink); background: rgba(26,26,26,0.03); }
+
+.sese-btn--blue {
+  background: var(--sese-blue);
+  color: var(--sese-warm-white);
+}
+.sese-btn--blue:hover { background: var(--sese-blue-700); }
+
+/* ── Reset for design-system pages ───────────────────────── */
+
+body.sese-surface {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  font-family: var(--font-body);
+  font-weight: var(--fw-light);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SESE — Homepage & Product Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="colors_and_type.css" />
+
+  <!-- Product images are referenced dynamically from JSX (window.SESE_PRODUCTS),
+       so the bundler can't discover them. Declare each here. -->
+  <meta name="ext-resource-dependency" content="assets/products/cleansing-foam-front-alt.jpg" data-resource-id="cleansing-foam-front-alt" />
+  <meta name="ext-resource-dependency" content="assets/products/cleansing-foam-tiles.jpg"     data-resource-id="cleansing-foam-tiles" />
+  <meta name="ext-resource-dependency" content="assets/products/hydrating-toner-front-alt.jpg" data-resource-id="hydrating-toner-front-alt" />
+  <meta name="ext-resource-dependency" content="assets/products/hydrating-toner-studio.jpg"   data-resource-id="hydrating-toner-studio" />
+  <meta name="ext-resource-dependency" content="assets/products/vitamin-c-serum-front-alt.jpg" data-resource-id="vitamin-c-serum-front-alt" />
+  <meta name="ext-resource-dependency" content="assets/products/vitamin-c-serum-studio.jpg"    data-resource-id="vitamin-c-serum-studio" />
+  <meta name="ext-resource-dependency" content="assets/products/peptide-serum-front.jpg"       data-resource-id="peptide-serum-front" />
+  <meta name="ext-resource-dependency" content="assets/products/peptide-serum-studio.jpg"      data-resource-id="peptide-serum-studio" />
+  <meta name="ext-resource-dependency" content="assets/products/retinol-alt-serum-front.jpg"     data-resource-id="retinol-alt-serum-front" />
+  <meta name="ext-resource-dependency" content="assets/products/retinol-alt-serum-front-alt.jpg" data-resource-id="retinol-alt-serum-front-alt" />
+  <meta name="ext-resource-dependency" content="assets/products/firming-day-cream-front.jpg"   data-resource-id="firming-day-cream-front" />
+  <meta name="ext-resource-dependency" content="assets/products/firming-day-cream-studio.jpg"  data-resource-id="firming-day-cream-studio" />
+  <meta name="ext-resource-dependency" content="assets/products/ceramide-night-cream-front-alt.jpg" data-resource-id="ceramide-night-cream-front-alt" />
+  <meta name="ext-resource-dependency" content="assets/products/ceramide-night-cream-studio.jpg"   data-resource-id="ceramide-night-cream-studio" />
+  <meta name="ext-resource-dependency" content="assets/products/smoothing-eye-cream-front.jpg"  data-resource-id="smoothing-eye-cream-front" />
+  <meta name="ext-resource-dependency" content="assets/products/smoothing-eye-cream-studio.jpg" data-resource-id="smoothing-eye-cream-studio" />
+  <meta name="ext-resource-dependency" content="assets/products/spf50-stick-front.jpg" data-resource-id="spf50-stick-front" />
+  <meta name="ext-resource-dependency" content="assets/products/spf50-stick-tiles.jpg" data-resource-id="spf50-stick-tiles" />
+
+  <style>
+    html, body { margin: 0; background: #EDE6D7; font-family: var(--font-display); font-weight: 300; }
+    button { font-family: var(--font-display); cursor: pointer; }
+    img { display: block; }
+  </style>
+
+  <template id="__bundler_thumbnail">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+      <rect width="400" height="400" fill="#FAF5EC"/>
+      <rect x="120" y="120" width="160" height="160" rx="80" fill="#E8D5B0"/>
+      <text x="200" y="220" font-family="Georgia, serif" font-weight="300" font-size="46" letter-spacing="14" text-anchor="middle" fill="#1A1A1A">SESE</text>
+    </svg>
+  </template>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="ui_kits/webshop/data.js"></script>
+  <script type="text/babel" src="ui_kits/webshop/Chrome.jsx"></script>
+  <script type="text/babel" src="ui_kits/webshop/Sections.jsx"></script>
+  <script type="text/babel" src="designs/PDP.jsx"></script>
+  <script type="text/babel" src="designs/HomeMobile.jsx"></script>
+  <script type="text/babel" src="designs/design-canvas.jsx"></script>
+
+  <script type="text/babel">
+    const products = window.SESE_PRODUCTS;
+    const peptide = products.find(p => p.id === "peptide-serum");
+
+    function HomeDesktop() {
+      return (
+        <div style={{ width: 1440, background: "var(--sese-warm-white)", color: "var(--sese-ink)" }}>
+          <AnnouncementBar />
+          <Nav onNav={()=>{}} current="home" />
+          <Hero onCta={()=>{}} />
+          <RoutineFlow />
+          <ProductGrid products={products} onOpen={()=>{}} />
+          <StarterBundle products={products} onCta={()=>{}} />
+          <DayVsNight products={products} />
+          <Ingredients />
+          <StorySection />
+          <Trust />
+          <FaqPreview onNav={()=>{}} />
+          <FinalCta onCta={()=>{}} />
+          <Footer />
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <DesignCanvas title="SESE — Homepage & Product Page" subtitle="Iteration · Peptide Serum · Editorial vs Clinical">
+          <DCSection id="home" title="Homepage">
+            <DCArtboard id="home-desktop" label="Desktop · 1440px" width={1440} height={6400}>
+              <HomeDesktop />
+            </DCArtboard>
+            <DCArtboard id="home-mobile" label="Mobile · 390px" width={390} height={2600}>
+              <HomeMobile products={products} />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="pdp-editorial" title="Product page · Editorial">
+            <DCArtboard id="pdp-ed-desktop" label="Desktop · 1440px" width={1440} height={2200}>
+              <div style={{ width: 1440 }}><PDPEditorial p={peptide} /></div>
+            </DCArtboard>
+            <DCArtboard id="pdp-ed-mobile" label="Mobile · 390px" width={390} height={1500}>
+              <PDPEditorialMobile p={peptide} />
+            </DCArtboard>
+          </DCSection>
+
+          <DCSection id="pdp-clinical" title="Product page · Clinical">
+            <DCArtboard id="pdp-cl-desktop" label="Desktop · 1440px" width={1440} height={1200}>
+              <div style={{ width: 1440 }}><PDPClinical p={peptide} /></div>
+            </DCArtboard>
+            <DCArtboard id="pdp-cl-mobile" label="Mobile · 390px" width={390} height={1400}>
+              <PDPClinicalMobile p={peptide} />
+            </DCArtboard>
+          </DCSection>
+        </DesignCanvas>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

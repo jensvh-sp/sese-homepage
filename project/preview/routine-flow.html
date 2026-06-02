@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:36px 32px;background:var(--bg-primary);font-family:var(--font-display);font-weight:300;color:var(--fg-primary)}
+  .flow{display:flex;align-items:center;justify-content:space-between;gap:14px}
+  .step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .num{font-size:11px;letter-spacing:.32em;color:var(--fg-muted)}
+  .name{font-size:16px;letter-spacing:.02em;margin-top:8px}
+  .arrow{flex:0 0 24px;height:1px;background:var(--line-default);position:relative}
+  .arrow:after{content:"";position:absolute;right:-1px;top:-3px;width:7px;height:7px;border-right:1px solid var(--line-strong);border-top:1px solid var(--line-strong);transform:rotate(45deg)}
+</style></head>
+<body>
+  <div class="flow">
+    <div class="step"><div class="num">01</div><div class="name">Cleanse</div></div>
+    <div class="arrow"></div>
+    <div class="step"><div class="num">02</div><div class="name">Tone</div></div>
+    <div class="arrow"></div>
+    <div class="step"><div class="num">03</div><div class="name">Treat</div></div>
+    <div class="arrow"></div>
+    <div class="step"><div class="num">04</div><div class="name">Moisturise</div></div>
+    <div class="arrow"></div>
+    <div class="step"><div class="num">05</div><div class="name">Protect</div></div>
+  </div>
+</body></html>
