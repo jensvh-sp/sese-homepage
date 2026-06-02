@@ -1252,6 +1252,17 @@ document.getElementById('cart-btn').addEventListener('click', async () => {
   document.getElementById('next').addEventListener('click', () =>
     track.scrollBy({ left:  STEP, behavior: 'smooth' }));
 })();
+
+// =============================================================
+//  Product card → product page navigation
+// =============================================================
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('.card-add')) return;
+    const key = card.dataset.product;
+    if (key) window.location.href = `product.html?p=${key}`;
+  });
+});
 </script>
 
 </body>
