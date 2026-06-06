@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shipping &amp; Delivery — SESE</title>
+  <meta name="description" content="Shipping and delivery information for SESE orders — timelines, costs, and tracking." />
+  <style>
+    @font-face {
+      font-family: "Todes";
+      src: url("project/fonts/Todes-Light.otf") format("opentype");
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+
+    :root {
+      --blue: #3A7D94; --blue-dark: #2A5C70; --sand: #E8D5B0;
+      --ink: #1A1A1A; --ink-2: #4A4A47; --ink-3: #7A7770;
+      --bg-nav: #FAF5EC;
+      --line-soft: rgba(26,26,26,0.08); --line-default: rgba(26,26,26,0.16);
+      --font-display: "Todes","Cormorant Garamond","Times New Roman",serif;
+      --font-ui: "Inter","Helvetica Neue",system-ui,sans-serif;
+      --ease-out: cubic-bezier(0.22,0.61,0.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #fff; color: var(--ink); font-family: var(--font-display); font-weight: 300; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; padding: 0; }
+
+    .page { width: 1440px; max-width: 100%; margin: 0 auto; background: #fff; }
+
+    .announce { background: var(--blue); color: #FFFCF5; text-align: center; padding: 11px 0; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; }
+    .announce .dot { opacity: 0.45; margin: 0 16px; }
+
+    .nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 26px 56px; background: var(--bg-nav); border-bottom: 1px solid var(--line-soft); }
+    .wordmark { font-size: 26px; letter-spacing: 0.34em; color: var(--ink); }
+    .nav-center { display: inline-flex; gap: 36px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-2); }
+    .nav-center a { position: relative; padding: 6px 0; transition: color .28s var(--ease-out); }
+    .nav-center a::after { content: ""; position: absolute; left: 50%; bottom: -2px; transform: translateX(-50%); width: 0; height: 1px; background: var(--ink); transition: width .32s var(--ease-out); }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-center a:hover::after { width: 22px; }
+    .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 22px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-2); }
+    .nav-icon { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+    .nav-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.25; }
+    .cart-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid var(--line-default) !important; border-radius: 999px; cursor: pointer; transition: background .28s var(--ease-out); color: var(--ink-2); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+    .cart-btn:hover { background: rgba(26,26,26,0.04); }
+    .cart-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); display: inline-block; }
+
+    .page-header { max-width: 960px; margin: 0 auto; padding: 80px 56px 64px; border-bottom: 1px solid var(--line-soft); }
+    .page-eyebrow { font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--ink-3); display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .page-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .page-header h1 { font-size: 56px; font-weight: 300; line-height: 1.05; margin: 0 0 20px; color: var(--ink); }
+    .page-header .subtitle { font-size: 18px; line-height: 1.7; color: var(--ink-3); margin: 0; max-width: 580px; }
+
+    .content-wrap { max-width: 960px; margin: 0 auto; padding: 0 56px 120px; }
+
+    .content-section { padding: 64px 0 0; border-top: 1px solid var(--line-soft); margin-top: 64px; }
+    .content-section:first-child { margin-top: 0; padding-top: 64px; }
+
+    .section-eyebrow { font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--ink-3); display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+    .section-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .section-title { font-size: 32px; font-weight: 300; color: var(--ink); margin: 0 0 32px; }
+
+    .content-section p { font-size: 17px; line-height: 1.8; color: var(--ink-2); margin: 0 0 20px; max-width: 740px; }
+    .content-section p:last-of-type { margin-bottom: 0; }
+
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; margin: 8px 0 32px; }
+    .data-table th {
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ink-3); font-weight: 300;
+      padding: 12px 20px 12px 0; border-bottom: 1px solid var(--line-default);
+      text-align: left;
+    }
+    .data-table td {
+      font-size: 16px; color: var(--ink-2); padding: 16px 20px 16px 0;
+      border-bottom: 1px solid var(--line-soft); line-height: 1.5;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td:first-child { color: var(--ink); }
+
+    /* Timeline steps */
+    .timeline { margin: 8px 0 32px; }
+    .timeline-step {
+      display: flex; gap: 24px; padding: 20px 0;
+      border-bottom: 1px solid var(--line-soft);
+      align-items: flex-start;
+    }
+    .timeline-step:last-child { border-bottom: none; }
+    .step-num {
+      flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--line-default);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; letter-spacing: 0.14em; color: var(--ink-3);
+    }
+    .step-text { font-size: 16px; line-height: 1.6; color: var(--ink-2); padding-top: 6px; }
+    .step-text strong { color: var(--ink); font-weight: 300; }
+
+    /* Info box */
+    .info-box {
+      background: #F5F9FB; border: 1px solid rgba(58,125,148,0.18);
+      border-radius: 12px; padding: 28px 32px; margin: 28px 0 0;
+    }
+    .info-box p { font-size: 15px; color: var(--ink-2); margin: 0 0 10px; }
+    .info-box p:last-child { margin-bottom: 0; }
+    .info-box strong { color: var(--ink); font-weight: 300; }
+
+    /* Contact strip */
+    .contact-strip {
+      margin-top: 80px; padding: 48px 56px;
+      background: var(--bg-nav);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 40px;
+    }
+    .contact-strip-text .eyebrow-sm { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+    .contact-strip-text h3 { font-size: 28px; font-weight: 300; color: var(--ink); margin: 0; }
+    .contact-strip-details { text-align: right; }
+    .contact-strip-details p { font-size: 15px; line-height: 1.8; color: var(--ink-2); margin: 0; }
+    .contact-strip-details a { border-bottom: 1px solid var(--line-default); }
+    .contact-strip-details a:hover { border-bottom-color: var(--ink); }
+
+    /* Footer */
+    .foot-wrap { margin-top: 0; background: var(--sand); color: #2A2620; }
+    .foot-top { padding: 80px 56px 56px; display: grid; grid-template-columns: 1.2fr 1px 1fr 1px 1fr; gap: 48px; align-items: stretch; }
+    .foot-divider { width: 1px; background: rgba(42,38,32,0.22); align-self: center; height: 60%; }
+    .foot-col h5 { margin: 0 0 22px; font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(42,38,32,0.6); font-weight: 300; }
+    .foot-wm { font-size: 30px; letter-spacing: 0.34em; color: #2A2620; margin-bottom: 18px; }
+    .foot-tag { font-style: italic; font-size: 18px; line-height: 1.5; color: #2A2620; max-width: 360px; margin-bottom: 32px; }
+    .foot-contact { font-size: 14px; line-height: 1.75; }
+    .foot-contact a { border-bottom: 1px solid rgba(42,38,32,0.25); }
+    .foot-contact a:hover { border-bottom-color: #2A2620; }
+    .foot-col ul { list-style: none; margin: 0; padding: 0; }
+    .foot-col li { padding: 6px 0; font-size: 15px; transition: opacity .28s var(--ease-out); }
+    .foot-col li a:hover { opacity: 0.6; }
+    .foot-bot { border-top: 1px solid rgba(42,38,32,0.2); padding: 24px 56px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(42,38,32,0.7); }
+    .pay { display: inline-flex; align-items: center; gap: 10px; }
+    .pay .chip { padding: 6px 10px; background: rgba(255,255,255,0.4); border: 1px solid rgba(42,38,32,0.18); border-radius: 6px; font-size: 10px; letter-spacing: 0.18em; color: #2A2620; font-family: var(--font-ui); font-weight: 500; }
+    .lang-foot { display: inline-flex; gap: 10px; align-items: center; }
+    .lang-foot .sep { opacity: 0.4; }
+
+    @media (max-width: 768px) {
+      .nav { padding: 20px 24px; grid-template-columns: 1fr auto; }
+      .nav-center { display: none; }
+      .page-header { padding: 48px 24px 40px; }
+      .page-header h1 { font-size: 36px; }
+      .content-wrap { padding: 0 24px 80px; }
+      .contact-strip { flex-direction: column; padding: 32px 24px; }
+      .contact-strip-details { text-align: left; }
+      .foot-top { grid-template-columns: 1fr; padding: 48px 24px 40px; gap: 32px; }
+      .foot-divider { display: none; }
+      .foot-bot { flex-direction: column; align-items: flex-start; padding: 20px 24px 28px; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="announce">
+    <span>Free shipping over €100</span>
+    <span class="dot">·</span>
+    <span>All products COSMOS Natural Certified · Vegan</span>
+  </div>
+
+  <header class="nav">
+    <a href="index.html" class="wordmark">S E S E</a>
+    <nav class="nav-center">
+      <a href="index.html">Shop</a>
+      <a href="index.html">Routines</a>
+      <a href="index.html">Cleanse &amp; Prep</a>
+      <a href="index.html">Serums</a>
+      <a href="index.html">Moisturize</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-right">
+      <span class="nav-icon" title="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </span>
+      <span>EN · NL · FR</span>
+      <button class="cart-btn">
+        <span class="cart-dot"></span>
+        <span>Cart · 0</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <div class="page-eyebrow">Customer Service</div>
+    <h1>Shipping &amp;<br/><em>Delivery.</em></h1>
+    <p class="subtitle">We handle your order with care, from our hands to yours. Here's everything you need to know.</p>
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="content-section" style="margin-top:64px; border-top:none; padding-top:0;">
+      <div class="section-eyebrow">01</div>
+      <div class="section-title">Overview</div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Timeline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Order processing</td><td>1–2 business days</td></tr>
+          <tr><td>Delivery within Europe</td><td>2–5 business days</td></tr>
+          <tr><td>Total estimated time</td><td>3–7 business days</td></tr>
+          <tr><td>Tracking email</td><td>Sent after dispatch</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">02</div>
+      <div class="section-title">Shipping Costs</div>
+      <p>Free shipping on all orders above €100. For orders below €100, shipping costs are calculated at checkout based on destination.</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Destination</th>
+            <th>Free shipping from</th>
+            <th>Delivery time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Belgium</td><td>Free from €100</td><td>1–3 business days</td></tr>
+          <tr><td>Netherlands</td><td>Free from €100</td><td>2–4 business days</td></tr>
+          <tr><td>France</td><td>Free from €100</td><td>3–5 business days</td></tr>
+          <tr><td>Germany</td><td>Free from €100</td><td>3–5 business days</td></tr>
+          <tr><td>Rest of Europe</td><td>Free from €100</td><td>3–7 business days</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">03</div>
+      <div class="section-title">Your Order, Step by Step</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <span class="step-num">01</span>
+          <div class="step-text"><strong>You place your order</strong> — via sese.be. You'll immediately receive a confirmation email with your order number.</div>
+        </div>
+        <div class="timeline-step">
+          <span class="step-num">02</span>
+          <div class="step-text"><strong>Processing</strong> — We carefully prepare your order within 1–2 business days.</div>
+        </div>
+        <div class="timeline-step">
+          <span class="step-num">03</span>
+          <div class="step-text"><strong>Dispatch confirmation</strong> — Once your parcel is on its way, you receive an email with your track &amp; trace link.</div>
+        </div>
+        <div class="timeline-step">
+          <span class="step-num">04</span>
+          <div class="step-text"><strong>Delivery</strong> — Your parcel arrives at your doorstep. Enjoy.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">04</div>
+      <div class="section-title">Problems With Your Delivery?</div>
+      <p><strong>Damaged parcel:</strong> Email <a href="mailto:customerservice@sese.be" style="border-bottom:1px solid var(--line-default);">customerservice@sese.be</a> with your order number and a photo of the damage. We'll resolve it quickly.</p>
+      <p><strong>Wrong product received:</strong> Contact us within 48 hours of receipt. We'll arrange the correct product for you.</p>
+      <p><strong>Parcel not received:</strong> First check your track &amp; trace link. If the issue persists, contact us and we'll investigate with the carrier.</p>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">05</div>
+      <div class="section-title">Good to Know</div>
+      <p>Address changes are possible before dispatch — contact us as soon as possible after placing your order.</p>
+      <p>Orders can be cancelled before dispatch. Once dispatched, you'll need to use our returns process.</p>
+      <p>No customs fees — all orders ship from within the EU, so there are no additional import duties for EU customers.</p>
+    </div>
+
+    <div class="contact-strip">
+      <div class="contact-strip-text">
+        <div class="eyebrow-sm">Still have questions?</div>
+        <h3>We're here to help.</h3>
+      </div>
+      <div class="contact-strip-details">
+        <p><a href="mailto:customerservice@sese.be">customerservice@sese.be</a></p>
+        <p>Response within 1–2 business days</p>
+        <p>Dutch · English · French</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="foot-wrap">
+  <div class="page">
+    <div class="foot-top">
+      <div class="foot-col">
+        <div class="foot-wm">S E S E</div>
+        <div class="foot-tag">Unlock your skin's <em>timeless beauty.</em></div>
+        <div class="foot-contact"><a href="mailto:customerservice@sese.be">customerservice@sese.be</a></div>
+      </div>
+      <div class="foot-divider"></div>
+      <div class="foot-col">
+        <h5>Klantenservice</h5>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="shipping.html">Shipping &amp; Delivery</a></li>
+          <li><a href="returns.html">Returns &amp; Refunds</a></li>
+          <li><a href="#">Track my order</a></li>
+        </ul>
+      </div>
+      <div class="foot-divider"></div>
+      <div class="foot-col">
+        <h5>Beleid &amp; info</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="returns.html#withdrawal">Right of Withdrawal</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 SESE · Based in Belgium</div>
+      <div class="pay">
+        <span class="chip">VISA</span><span class="chip">Mastercard</span>
+        <span class="chip">Bancontact</span><span class="chip">PayPal</span>
+        <span class="chip">Apple&nbsp;Pay</span>
+      </div>
+      <div class="lang-foot">
+        <span>NL</span><span class="sep">·</span><span style="color:#2A2620;font-weight:400">EN</span><span class="sep">·</span><span>FR</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

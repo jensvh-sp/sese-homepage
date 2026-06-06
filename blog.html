@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Journal — SESE</title>
+  <meta name="description" content="Skincare stories, ingredient guides, and honest advice from SESE." />
+  <style>
+    @font-face {
+      font-family: "Todes";
+      src: url("project/fonts/Todes-Light.otf") format("opentype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --blue:         #3A7D94;
+      --blue-dark:    #2A5C70;
+      --green:        #4E7A4E;
+      --sand:         #E8D5B0;
+      --warm-white:   #FAF5EC;
+      --ink:          #1A1A1A;
+      --ink-2:        #4A4A47;
+      --ink-3:        #7A7770;
+      --bg-page:      #FFFFFF;
+      --bg-nav:       #FAF5EC;
+      --line-soft:    rgba(26,26,26,0.08);
+      --line-default: rgba(26,26,26,0.16);
+      --line-strong:  rgba(26,26,26,0.28);
+      --font-display: "Todes","Cormorant Garamond","Times New Roman",serif;
+      --font-ui:      "Inter","Helvetica Neue",system-ui,sans-serif;
+      --ease-out:     cubic-bezier(0.22,0.61,0.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; padding: 0; }
+
+    .page { max-width: 1440px; margin: 0 auto; background: var(--bg-page); }
+
+    /* ── Announcement ── */
+    .announce {
+      background: var(--blue);
+      color: #FFFCF5;
+      text-align: center;
+      padding: 11px 0;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .announce .dot { opacity: 0.45; margin: 0 16px; }
+
+    /* ── Nav ── */
+    .nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 26px 56px;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .wordmark { font-size: 26px; letter-spacing: 0.34em; color: var(--ink); }
+    .nav-center {
+      display: inline-flex; gap: 36px;
+      font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .nav-center a {
+      position: relative; padding: 6px 0;
+      transition: color .28s var(--ease-out);
+    }
+    .nav-center a::after {
+      content: ""; position: absolute; left: 50%; bottom: -2px;
+      transform: translateX(-50%);
+      width: 0; height: 1px; background: var(--ink);
+      transition: width .32s var(--ease-out);
+    }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-center a:hover::after,
+    .nav-center a.active::after { width: 22px; }
+    .nav-right {
+      display: flex; justify-content: flex-end; align-items: center;
+      gap: 22px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .cart-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--line-default) !important;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .28s var(--ease-out);
+      color: var(--ink-2);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      font-family: var(--font-display); font-weight: 300;
+    }
+    .cart-btn:hover { background: rgba(26,26,26,0.04); }
+    .cart-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); display: inline-block; }
+
+    /* ── Blog Hero ── */
+    .blog-hero {
+      padding: 96px 56px 72px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .blog-hero-eyebrow {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .blog-hero-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .blog-hero h1 {
+      margin: 0 0 20px;
+      font-size: 80px; line-height: 0.96; letter-spacing: 0.01em;
+      font-weight: 300; color: var(--ink);
+    }
+    .blog-hero-sub {
+      font-style: italic;
+      font-size: 22px; line-height: 1.5;
+      color: var(--ink-2); max-width: 640px;
+    }
+
+    /* ── Featured post ── */
+    .featured-wrap {
+      padding: 64px 56px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .featured-label {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 32px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .featured-label::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .featured-post {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+    }
+    .featured-img {
+      aspect-ratio: 4/3;
+      border-radius: 18px;
+      overflow: hidden;
+      background: linear-gradient(155deg, #EFDFC2 0%, #D9BE8E 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .featured-img-inner {
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(135deg, transparent 0 18px, rgba(255,255,255,0.12) 18px 19px);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-ui);
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(42,38,32,0.5);
+    }
+    .featured-body {}
+    .featured-meta {
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .featured-meta .sep { opacity: 0.4; }
+    .featured-body h2 {
+      margin: 0 0 20px;
+      font-size: 44px; line-height: 1.08; font-weight: 300; letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+    .featured-body h2 em { font-style: italic; }
+    .featured-excerpt {
+      font-size: 17px; line-height: 1.75;
+      color: var(--ink-2); margin: 0 0 32px;
+      max-width: 540px;
+    }
+    .read-more {
+      display: inline-flex; align-items: center; gap: 14px;
+      font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink);
+      border-bottom: 1px solid var(--line-default);
+      padding-bottom: 4px;
+      transition: border-color .28s var(--ease-out);
+    }
+    .read-more:hover { border-color: var(--ink); }
+
+    /* ── Grid posts ── */
+    .grid-section {
+      padding: 64px 56px 96px;
+    }
+    .grid-section-label {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 40px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .grid-section-label::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px 40px;
+    }
+    .post-card {
+      display: flex; flex-direction: column;
+    }
+    .post-card-num {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .post-card-date {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 12px;
+    }
+    .post-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px; line-height: 1.2; font-weight: 300;
+      color: var(--ink);
+      transition: color .28s var(--ease-out);
+    }
+    .post-card:hover h3 { color: var(--blue); }
+    .post-card-excerpt {
+      font-size: 14px; line-height: 1.75;
+      color: var(--ink-2);
+      margin: 0 0 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .post-card-link {
+      margin-top: auto;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3);
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: color .28s var(--ease-out);
+    }
+    .post-card:hover .post-card-link { color: var(--ink); }
+
+    /* ── Footer ── */
+    .foot-wrap { background: var(--sand); color: #2A2620; }
+    .foot-top {
+      padding: 80px 56px 56px;
+      display: grid;
+      grid-template-columns: 1.2fr 1px 1fr 1px 1fr;
+      gap: 48px; align-items: stretch;
+    }
+    .foot-divider { width: 1px; background: rgba(42,38,32,0.22); align-self: center; height: 60%; }
+    .foot-col h5 { margin: 0 0 22px; font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(42,38,32,0.6); font-weight: 300; }
+    .foot-wm { font-size: 30px; letter-spacing: 0.34em; color: #2A2620; margin-bottom: 18px; }
+    .foot-tag { font-style: italic; font-size: 18px; line-height: 1.5; color: #2A2620; max-width: 360px; margin-bottom: 32px; }
+    .foot-contact { font-size: 14px; line-height: 1.75; }
+    .foot-contact a { border-bottom: 1px solid rgba(42,38,32,0.25); }
+    .foot-contact a:hover { border-bottom-color: #2A2620; }
+    .foot-col ul { list-style: none; margin: 0; padding: 0; }
+    .foot-col li { padding: 6px 0; font-size: 15px; transition: opacity .28s var(--ease-out); }
+    .foot-col li a:hover { opacity: 0.6; }
+    .foot-bot {
+      border-top: 1px solid rgba(42,38,32,0.2);
+      padding: 24px 56px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(42,38,32,0.7);
+    }
+    .pay { display: inline-flex; align-items: center; gap: 10px; }
+    .pay .chip {
+      padding: 6px 10px; background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(42,38,32,0.18); border-radius: 6px;
+      font-size: 10px; letter-spacing: 0.18em; color: #2A2620;
+      font-family: var(--font-ui); font-weight: 500;
+    }
+    .lang-foot { display: inline-flex; gap: 10px; align-items: center; }
+    .lang-foot .sep { opacity: 0.4; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .blog-hero h1 { font-size: 60px; }
+      .featured-post { grid-template-columns: 1fr; gap: 40px; }
+      .posts-grid { grid-template-columns: repeat(2, 1fr); }
+      .nav { padding: 20px 32px; }
+      .blog-hero, .featured-wrap, .grid-section { padding-left: 32px; padding-right: 32px; }
+      .foot-top { padding: 56px 32px 40px; }
+      .foot-bot { padding: 20px 32px 28px; }
+    }
+    @media (max-width: 720px) {
+      .nav { grid-template-columns: 1fr 1fr; padding: 18px 20px; }
+      .nav-center { display: none; }
+      .blog-hero { padding: 56px 20px 48px; }
+      .blog-hero h1 { font-size: 48px; }
+      .blog-hero-sub { font-size: 17px; }
+      .featured-wrap, .grid-section { padding-left: 20px; padding-right: 20px; }
+      .featured-body h2 { font-size: 32px; }
+      .posts-grid { grid-template-columns: 1fr; gap: 40px; }
+      .foot-top { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px 36px; }
+      .foot-divider { display: none; }
+      .foot-bot { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px 20px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Announcement -->
+  <div class="announce">
+    <span>Free shipping over €100</span>
+    <span class="dot">·</span>
+    <span>All products COSMOS Natural Certified</span>
+    <span class="dot">·</span>
+    <span>Vegan</span>
+  </div>
+
+  <!-- Nav -->
+  <header class="nav">
+    <a href="index.html" class="wordmark">S E S E</a>
+    <nav class="nav-center">
+      <a href="collection.html">Shop</a>
+      <a href="#">Routines</a>
+      <a href="#">Cleanse &amp; Prep</a>
+      <a href="#">Serums</a>
+      <a href="#">Moisturize</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-right">
+      <span>EN · NL · FR</span>
+      <button class="cart-btn">
+        <span class="cart-dot"></span>
+        <span>Cart · 0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Blog Hero -->
+  <div class="blog-hero">
+    <div class="blog-hero-eyebrow">From the journal</div>
+    <h1>The Journal</h1>
+    <p class="blog-hero-sub">Skincare stories, ingredient guides, and honest advice.</p>
+  </div>
+
+  <!-- Featured post -->
+  <div class="featured-wrap">
+    <div class="featured-label">Featured article</div>
+    <div class="featured-post">
+      <div class="featured-img">
+        <div class="featured-img-inner">Journal · Issue No. 01</div>
+      </div>
+      <div class="featured-body">
+        <div class="featured-meta">
+          <span>June 2026</span>
+          <span class="sep">·</span>
+          <span>7 min read</span>
+        </div>
+        <h2>How to build an anti-aging routine<br/><em>from scratch</em></h2>
+        <p class="featured-excerpt">The five steps that make the difference. No complicated protocols, no expensive extras — just the right foundation, in the right order. Everything your skin actually needs, nothing it doesn't.</p>
+        <a href="blog-post.html?p=1" class="read-more">Read more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid posts -->
+  <div class="grid-section">
+    <div class="grid-section-label">More from the journal</div>
+    <div class="posts-grid">
+
+      <div class="post-card">
+        <div class="post-card-num">No. 02</div>
+        <div class="post-card-date">June 2026 · 5 min read</div>
+        <h3>Why peptides are the gentle path to firmer skin</h3>
+        <p class="post-card-excerpt">Retinol gets all the press. But for skin that wants results without a reaction, peptides are the quieter, smarter choice.</p>
+        <a href="blog-post.html?p=2" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 03</div>
+        <div class="post-card-date">June 2026 · 6 min read</div>
+        <h3>The truth about Vitamin C: what your skin actually needs to know</h3>
+        <p class="post-card-excerpt">Stable, effective, and worth every morning. Here is what the research says — and what to ignore.</p>
+        <a href="blog-post.html?p=3" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 04</div>
+        <div class="post-card-date">June 2026 · 5 min read</div>
+        <h3>SPF every day: why sun protection is the best anti-aging investment you can make</h3>
+        <p class="post-card-excerpt">80% of visible skin aging comes from UV. Everything else in your routine depends on this one step.</p>
+        <a href="blog-post.html?p=4" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 05</div>
+        <div class="post-card-date">June 2026 · 5 min read</div>
+        <h3>How to layer skincare products correctly</h3>
+        <p class="post-card-excerpt">Lightest to heaviest. Actives before occlusives. There is a logic to the order — and it makes everything work better.</p>
+        <a href="blog-post.html?p=5" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 06</div>
+        <div class="post-card-date">June 2026 · 5 min read</div>
+        <h3>The difference between moisturising and barrier repair</h3>
+        <p class="post-card-excerpt">Hydration gets in. The barrier keeps it there. Understanding the difference changes how you shop for skincare.</p>
+        <a href="blog-post.html?p=6" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 07</div>
+        <div class="post-card-date">June 2026 · 6 min read</div>
+        <h3>What COSMOS Natural means — and why it matters for your skin</h3>
+        <p class="post-card-excerpt">A certification with teeth. Here is what it requires, what it excludes, and why it is worth looking for.</p>
+        <a href="blog-post.html?p=7" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 08</div>
+        <div class="post-card-date">June 2026 · 5 min read</div>
+        <h3>What your skin does while you sleep (and how to support it)</h3>
+        <p class="post-card-excerpt">The regeneration cycle. The repair window. Why your night cream matters more than your morning one.</p>
+        <a href="blog-post.html?p=8" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 09</div>
+        <div class="post-card-date">June 2026 · 5 min read</div>
+        <h3>How to choose the right serum for your skin type</h3>
+        <p class="post-card-excerpt">Three serums. Three different results. Here is the honest guide to knowing which one is for you.</p>
+        <a href="blog-post.html?p=9" class="post-card-link">Read →</a>
+      </div>
+
+      <div class="post-card">
+        <div class="post-card-num">No. 10</div>
+        <div class="post-card-date">June 2026 · 6 min read</div>
+        <h3>The Belgian coast beauty ritual: slow skincare for lasting results</h3>
+        <p class="post-card-excerpt">SESE was born from a very specific idea about how to care for skin. This is that idea, in full.</p>
+        <a href="blog-post.html?p=10" class="post-card-link">Read →</a>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /.page -->
+
+<!-- Footer -->
+<footer class="foot-wrap">
+  <div class="page">
+    <div class="foot-top">
+
+      <div class="foot-col">
+        <div class="foot-wm">S E S E</div>
+        <div class="foot-tag">Unlock your skin's <em>timeless beauty.</em></div>
+        <div class="foot-contact">
+          <a href="mailto:customerservice@sese.be">customerservice@sese.be</a>
+        </div>
+      </div>
+
+      <div class="foot-divider"></div>
+
+      <div class="foot-col">
+        <h5>Klantenservice</h5>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#">Shipping &amp; Delivery</a></li>
+          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="#">Track my order</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-divider"></div>
+
+      <div class="foot-col">
+        <h5>Beleid &amp; Info</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Right of Withdrawal</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="foot-bot">
+      <div>© 2026 SESE · Based in Belgium</div>
+      <div class="pay">
+        <span class="chip">VISA</span>
+        <span class="chip">Mastercard</span>
+        <span class="chip">Bancontact</span>
+        <span class="chip">PayPal</span>
+        <span class="chip">Apple&nbsp;Pay</span>
+      </div>
+      <div class="lang-foot">
+        <span>NL</span><span class="sep">·</span><span style="color:#2A2620;font-weight:400">EN</span><span class="sep">·</span><span>FR</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

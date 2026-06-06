@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Right of Withdrawal — SESE</title>
+  <meta name="description" content="Your legal right to cancel an order within 14 days — SESE, sese.be." />
+  <style>
+    @font-face {
+      font-family: "Todes";
+      src: url("project/fonts/Todes-Light.otf") format("opentype");
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+    :root {
+      --blue: #3A7D94; --blue-dark: #2A5C70; --sand: #E8D5B0;
+      --ink: #1A1A1A; --ink-2: #4A4A47; --ink-3: #7A7770;
+      --bg-nav: #FAF5EC;
+      --line-soft: rgba(26,26,26,0.08); --line-default: rgba(26,26,26,0.16);
+      --font-display: "Todes","Cormorant Garamond","Times New Roman",serif;
+      --font-ui: "Inter","Helvetica Neue",system-ui,sans-serif;
+      --ease-out: cubic-bezier(0.22,0.61,0.36,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #fff; color: var(--ink); font-family: var(--font-display); font-weight: 300; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; padding: 0; }
+    .page { width: 1440px; max-width: 100%; margin: 0 auto; background: #fff; }
+    .announce { background: var(--blue); color: #FFFCF5; text-align: center; padding: 11px 0; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; }
+    .announce .dot { opacity: 0.45; margin: 0 16px; }
+    .nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 26px 56px; background: var(--bg-nav); border-bottom: 1px solid var(--line-soft); }
+    .wordmark { font-size: 26px; letter-spacing: 0.34em; color: var(--ink); }
+    .nav-center { display: inline-flex; gap: 36px; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-2); }
+    .nav-center a { position: relative; padding: 6px 0; transition: color .28s var(--ease-out); }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-right { display: flex; justify-content: flex-end; align-items: center; gap: 22px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-2); }
+    .nav-icon { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+    .nav-icon svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.25; }
+    .cart-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid var(--line-default) !important; border-radius: 999px; cursor: pointer; color: var(--ink-2); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+    .cart-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); display: inline-block; }
+    .page-header { max-width: 960px; margin: 0 auto; padding: 80px 56px 64px; border-bottom: 1px solid var(--line-soft); }
+    .page-eyebrow { font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--ink-3); display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+    .page-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .page-header h1 { font-size: 56px; font-weight: 300; line-height: 1.05; margin: 0 0 20px; color: var(--ink); }
+    .page-header .subtitle { font-size: 18px; line-height: 1.7; color: var(--ink-3); margin: 0; max-width: 580px; }
+    .content-wrap { max-width: 960px; margin: 0 auto; padding: 0 56px 120px; }
+    .content-section { padding: 64px 0 0; border-top: 1px solid var(--line-soft); margin-top: 64px; }
+    .section-eyebrow { font-size: 11px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--ink-3); display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+    .section-eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .section-title { font-size: 32px; font-weight: 300; color: var(--ink); margin: 0 0 32px; }
+    .content-section p { font-size: 17px; line-height: 1.8; color: var(--ink-2); margin: 0 0 20px; max-width: 740px; }
+    .content-section p:last-of-type { margin-bottom: 0; }
+    .content-section ul, .content-section ol { padding-left: 1.4em; margin: 0 0 20px; }
+    .content-section li { font-size: 17px; line-height: 1.8; color: var(--ink-2); margin-bottom: 8px; }
+    .data-table { width: 100%; border-collapse: collapse; margin: 8px 0 32px; }
+    .data-table th { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-3); font-weight: 300; padding: 12px 20px 12px 0; border-bottom: 1px solid var(--line-default); text-align: left; }
+    .data-table td { font-size: 16px; color: var(--ink-2); padding: 16px 20px 16px 0; border-bottom: 1px solid var(--line-soft); line-height: 1.5; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td:first-child { color: var(--ink); }
+    .warning-box { background: #FFF3E8; border-left: 4px solid #C05000; border-radius: 0 10px 10px 0; padding: 24px 28px; margin: 20px 0 32px; }
+    .warning-box p { font-size: 16px; line-height: 1.75; color: #3A2000; margin: 0 0 10px; }
+    .warning-box p:last-child { margin-bottom: 0; }
+    .form-box { background: var(--bg-nav); border: 1px solid var(--line-soft); border-radius: 12px; padding: 32px; margin-top: 24px; }
+    .form-box .form-label { font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 16px; }
+    .form-box pre { font-family: var(--font-display); font-size: 15px; line-height: 1.9; color: var(--ink-2); margin: 0; white-space: pre-wrap; }
+    .contact-strip { margin-top: 80px; padding: 48px 56px; background: var(--bg-nav); border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .contact-strip-text .eyebrow-sm { font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+    .contact-strip-text h3 { font-size: 28px; font-weight: 300; color: var(--ink); margin: 0; }
+    .contact-strip-details { text-align: right; }
+    .contact-strip-details p { font-size: 15px; line-height: 1.8; color: var(--ink-2); margin: 0; }
+    .contact-strip-details a { border-bottom: 1px solid var(--line-default); }
+    .foot-wrap { margin-top: 0; background: var(--sand); color: #2A2620; }
+    .foot-top { padding: 80px 56px 56px; display: grid; grid-template-columns: 1.2fr 1px 1fr 1px 1fr; gap: 48px; align-items: stretch; }
+    .foot-divider { width: 1px; background: rgba(42,38,32,0.22); align-self: center; height: 60%; }
+    .foot-col h5 { margin: 0 0 22px; font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(42,38,32,0.6); font-weight: 300; }
+    .foot-wm { font-size: 30px; letter-spacing: 0.34em; color: #2A2620; margin-bottom: 18px; }
+    .foot-tag { font-style: italic; font-size: 18px; line-height: 1.5; color: #2A2620; max-width: 360px; margin-bottom: 32px; }
+    .foot-contact { font-size: 14px; line-height: 1.75; }
+    .foot-contact a { border-bottom: 1px solid rgba(42,38,32,0.25); }
+    .foot-col ul { list-style: none; margin: 0; padding: 0; }
+    .foot-col li { padding: 6px 0; font-size: 15px; }
+    .foot-col li a:hover { opacity: 0.6; }
+    .foot-bot { border-top: 1px solid rgba(42,38,32,0.2); padding: 24px 56px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(42,38,32,0.7); }
+    .pay { display: inline-flex; align-items: center; gap: 10px; }
+    .pay .chip { padding: 6px 10px; background: rgba(255,255,255,0.4); border: 1px solid rgba(42,38,32,0.18); border-radius: 6px; font-size: 10px; letter-spacing: 0.18em; color: #2A2620; font-family: var(--font-ui); font-weight: 500; }
+    .lang-foot { display: inline-flex; gap: 10px; align-items: center; }
+    .lang-foot .sep { opacity: 0.4; }
+    @media (max-width: 768px) {
+      .nav { padding: 20px 24px; grid-template-columns: 1fr auto; }
+      .nav-center { display: none; }
+      .page-header { padding: 48px 24px 40px; }
+      .page-header h1 { font-size: 36px; }
+      .content-wrap { padding: 0 24px 80px; }
+      .contact-strip { flex-direction: column; padding: 32px 24px; }
+      .contact-strip-details { text-align: left; }
+      .foot-top { grid-template-columns: 1fr; padding: 48px 24px 40px; gap: 32px; }
+      .foot-divider { display: none; }
+      .foot-bot { flex-direction: column; align-items: flex-start; padding: 20px 24px 28px; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="announce">
+    <span>Free shipping over €100</span>
+    <span class="dot">·</span>
+    <span>All products COSMOS Natural Certified · Vegan</span>
+  </div>
+
+  <header class="nav">
+    <a href="index.html" class="wordmark">S E S E</a>
+    <nav class="nav-center">
+      <a href="collection.html">Shop</a>
+      <a href="index.html#forever-bundle">Routines</a>
+      <a href="collection.html">Cleanse &amp; Prep</a>
+      <a href="collection.html">Serums</a>
+      <a href="collection.html">Moisturize</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-right">
+      <span class="nav-icon" title="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </span>
+      <span>EN · NL · FR</span>
+      <button class="cart-btn">
+        <span class="cart-dot"></span>
+        <span>Cart · 0</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="page-header">
+    <div class="page-eyebrow">Legal — Consumer Rights</div>
+    <h1>Right of<br/><em>Withdrawal.</em></h1>
+    <p class="subtitle">You have the right to cancel your order within 14 days of receipt — no questions asked. Here is everything you need to know.</p>
+  </div>
+
+  <div class="content-wrap">
+
+    <div class="content-section" style="margin-top:64px; border-top:none; padding-top:0;">
+      <div class="section-eyebrow">01</div>
+      <div class="section-title">Your Right to Cancel</div>
+      <p>As a consumer in the European Union, you have the legal right to withdraw from a distance purchase within 14 calendar days of receiving your order, without giving a reason and free of charge (except for return shipping costs).</p>
+      <p>This right is established in EU Directive 2011/83/EU and implemented in Belgium through the Code of Economic Law (Art. VI.47 et seq.).</p>
+      <table class="data-table">
+        <thead><tr><th>Detail</th><th>Your rights at SESE</th></tr></thead>
+        <tbody>
+          <tr><td>Withdrawal period</td><td>14 calendar days from receipt of your order</td></tr>
+          <tr><td>Return deadline</td><td>14 calendar days after notifying us of your withdrawal</td></tr>
+          <tr><td>Refund deadline</td><td>Within 14 days of receiving the returned goods</td></tr>
+          <tr><td>Return costs</td><td>At the customer's expense, unless stated otherwise</td></tr>
+          <tr><td>SESE extra guarantee</td><td>30-day satisfaction guarantee on unopened products</td></tr>
+          <tr><td>Exception</td><td>Opened cosmetic products (hygiene — see §4)</td></tr>
+          <tr><td>Legal basis</td><td>EU Directive 2011/83/EU · WER Art. VI.47–VI.53</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">02</div>
+      <div class="section-title">Withdrawal Period</div>
+      <p>You have the right to withdraw from this contract within 14 calendar days without giving any reason. The withdrawal period expires 14 days after the day on which you, or a third party designated by you (other than the carrier), physically takes possession of the goods.</p>
+      <p>To exercise your right of withdrawal, you must inform us of your decision by means of an unambiguous statement — for example, by email:</p>
+      <table class="data-table">
+        <thead><tr><th>Contact</th><th></th></tr></thead>
+        <tbody>
+          <tr><td>Email</td><td><a href="mailto:customerservice@sese.be" style="border-bottom:1px solid var(--line-default)">customerservice@sese.be</a></td></tr>
+          <tr><td>Subject line</td><td>Withdrawal — order [your order number]</td></tr>
+          <tr><td>Please include</td><td>Name · Order number · Order date · Date received</td></tr>
+        </tbody>
+      </table>
+      <p>You may use the model withdrawal form in §7 of this document, but this is not mandatory. Any unambiguous written statement is sufficient.</p>
+      <p>If you exercise your right of withdrawal before the deadline, you must return the goods no later than 14 days after notifying us.</p>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">03</div>
+      <div class="section-title">Return Procedure</div>
+      <ol>
+        <li>Send an email to <a href="mailto:customerservice@sese.be" style="border-bottom:1px solid var(--line-default)">customerservice@sese.be</a> stating your name, order number, and your intention to withdraw from the contract.</li>
+        <li>You will receive a confirmation within 1–2 business days, including the return address.</li>
+        <li>Return the products within 14 calendar days of notifying us.</li>
+        <li>Pack the products carefully in the original packaging or equivalent packaging.</li>
+        <li>Send by tracked or registered post — you are responsible for the goods until they reach us.</li>
+      </ol>
+      <p>The return address will be provided in the confirmation email. Never send a return without prior confirmation from us.</p>
+      <p>The direct costs of returning the goods are at your expense, unless we have expressly stated otherwise. We recommend using a shipping method with tracking. SESE is not liable for lost return shipments.</p>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">04</div>
+      <div class="section-title">Exception — Cosmetic Products</div>
+      <div class="warning-box">
+        <p><strong>Important:</strong> The right of withdrawal does NOT apply to cosmetic products whose seal has been broken after delivery, for reasons of health protection or hygiene.</p>
+        <p>Legal basis: Article VI.53, 5° Code of Economic Law (BE) and Article 16(e) Directive 2011/83/EU.</p>
+      </div>
+      <p>Skincare and cosmetic products at SESE can only be returned if ALL of the following conditions are met:</p>
+      <ul>
+        <li>The product is unused</li>
+        <li>The product is unopened</li>
+        <li>The original seal is intact and undamaged</li>
+        <li>The product is in its original condition and packaging</li>
+      </ul>
+      <p>Products that have been opened, used, or whose seal has been broken cannot be accepted back for hygiene reasons required by law — unless the product is demonstrably defective or incorrectly delivered.</p>
+      <p>SESE reserves the right to refuse returns that do not meet the above conditions. In that case, the products will be returned to the customer at the customer's expense.</p>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">05</div>
+      <div class="section-title">Refunds</div>
+      <p>If you validly exercise your right of withdrawal, we will reimburse all payments received from you, including standard delivery costs (excluding any additional costs arising from your choice of a more expensive delivery method).</p>
+      <p>We will process your refund no later than 14 calendar days after receiving your return shipment — or 14 days after you provide evidence of having returned the goods, whichever is earlier. The refund will be made using the same means of payment you used for the original transaction.</p>
+      <table class="data-table">
+        <thead><tr><th>Payment method</th><th>Refund via</th></tr></thead>
+        <tbody>
+          <tr><td>Bancontact</td><td>Bancontact — same account</td></tr>
+          <tr><td>Visa / Mastercard</td><td>Same card — via card issuer</td></tr>
+          <tr><td>PayPal</td><td>PayPal account</td></tr>
+          <tr><td>Other method</td><td>Same method or by mutual agreement</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">06</div>
+      <div class="section-title">SESE 30-Day Satisfaction Guarantee</div>
+      <p>In addition to the legal 14-day right of withdrawal, SESE offers an extra 30-day satisfaction guarantee on unopened products. This is a voluntary, commercial guarantee — supplementary to and never limiting your legal rights.</p>
+      <p>Conditions of the SESE 30-day guarantee:</p>
+      <ul>
+        <li>Return notification made within 30 calendar days of receiving the order</li>
+        <li>Products are unused and unopened</li>
+        <li>Original packaging and seal are intact</li>
+        <li>Return shipping costs are at the customer's expense</li>
+      </ul>
+      <p>This guarantee does not affect your statutory rights as a consumer. Your legal rights under EU consumer law remain fully in force at all times.</p>
+    </div>
+
+    <div class="content-section" id="withdrawal-form">
+      <div class="section-eyebrow">07</div>
+      <div class="section-title">Model Withdrawal Form</div>
+      <p>Use of this form is not mandatory. You may also send your own statement by email, provided it is unambiguous. Copy the text below into an email to <a href="mailto:customerservice@sese.be" style="border-bottom:1px solid var(--line-default)">customerservice@sese.be</a>.</p>
+      <div class="form-box">
+        <div class="form-label">Model Withdrawal Form</div>
+        <pre>To: SESE — customerservice@sese.be
+
+I/We hereby give notice that I/we withdraw from my/our contract
+of sale of the following goods:
+
+Order number: ................................................................
+Product name(s): ..............................................................
+Ordered on / received on: .....................................................
+Name of consumer(s): ..........................................................
+Address of consumer(s): .......................................................
+Date: .........................................................................</pre>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <div class="section-eyebrow">08</div>
+      <div class="section-title">Dispute Resolution</div>
+      <p>As a consumer, you have the right to use out-of-court dispute resolution in the event of a complaint:</p>
+      <ul>
+        <li>Consumer Mediation Service (Belgium): <a href="https://www.consumentenombudsdienst.be" target="_blank" rel="noopener" style="border-bottom:1px solid var(--line-default)">consumentenombudsdienst.be</a></li>
+        <li>Online Dispute Resolution (EU): <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener" style="border-bottom:1px solid var(--line-default)">ec.europa.eu/consumers/odr</a></li>
+      </ul>
+      <p>All agreements concluded with SESE are governed by Belgian law. In the event of a dispute, the courts of the district of SESE's registered office have jurisdiction, without prejudice to the mandatory jurisdiction rules applicable in favour of the consumer.</p>
+      <p style="font-size:14px; color:var(--ink-3);">Last updated: 24 April 2026</p>
+    </div>
+
+    <div class="contact-strip">
+      <div class="contact-strip-text">
+        <div class="eyebrow-sm">Questions?</div>
+        <h3>We're here to help.</h3>
+      </div>
+      <div class="contact-strip-details">
+        <p>
+          <a href="mailto:customerservice@sese.be">customerservice@sese.be</a><br/>
+          Response within 1–2 business days · Dutch &amp; English
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="foot-wrap">
+  <div class="page">
+    <div class="foot-top">
+      <div class="foot-col">
+        <div class="foot-wm">S E S E</div>
+        <div class="foot-tag">Unlock your skin's <em>timeless beauty.</em></div>
+        <div class="foot-contact">
+          <a href="mailto:customerservice@sese.be">customerservice@sese.be</a>
+        </div>
+      </div>
+      <div class="foot-divider"></div>
+      <div class="foot-col">
+        <h5>Klantenservice</h5>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="shipping.html">Shipping &amp; Delivery</a></li>
+          <li><a href="returns.html">Returns &amp; Refunds</a></li>
+          <li><a href="#">Track my order</a></li>
+        </ul>
+      </div>
+      <div class="foot-divider"></div>
+      <div class="foot-col">
+        <h5>Beleid &amp; info</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="withdrawal.html">Right of Withdrawal</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <div>© 2026 SESE · Based in Belgium</div>
+      <div class="pay">
+        <span class="chip">VISA</span>
+        <span class="chip">Mastercard</span>
+        <span class="chip">Bancontact</span>
+        <span class="chip">PayPal</span>
+        <span class="chip">Apple&nbsp;Pay</span>
+      </div>
+      <div class="lang-foot">
+        <span>NL</span><span class="sep">·</span><span style="font-weight:400">EN</span><span class="sep">·</span><span>FR</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

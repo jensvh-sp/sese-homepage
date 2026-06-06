@@ -274,7 +274,6 @@
       padding: 16px 16px 22px;
       cursor: pointer;
       transition: transform .42s var(--ease-out), box-shadow .42s var(--ease-out);
-      border: 1px solid var(--line-soft);
       display: block;
     }
     .card:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -22px rgba(26,26,26,0.22); }
@@ -642,9 +641,7 @@
       <p class="subtitle">Timeless skin, naturally yours.</p>
       <p class="lede">Care for your skin with intention, softness, and the right foundation.</p>
       <div class="hero-ctas">
-        <button class="btn btn--primary" onclick="document.getElementById('essentials').scrollIntoView({behavior:'smooth'})">
-          Shop Now <span class="arrow">→</span>
-        </button>
+        <a class="btn btn--primary" href="collection.html">Shop Now <span class="arrow">→</span></a>
         <button class="btn btn--blue-outline" onclick="document.getElementById('forever-bundle').scrollIntoView({behavior:'smooth'})">
           Discover your routine
         </button>
@@ -678,7 +675,7 @@
       <div class="eyebrow">Discover your essentials</div>
     </div>
     <div class="head-aside">
-      <a href="#">Shop all</a>
+      <a href="collection.html">Shop all</a>
       <div class="arrows">
         <button id="prev" aria-label="Previous">‹</button>
         <button id="next" aria-label="Next">›</button>
@@ -691,7 +688,6 @@
 
       <div class="card" data-product="cleansing-foam">
         <div class="card-pic" style="background-color:#E3EEF5;background-image:url('project/assets/products/cleansing-foam-front-alt.jpg')">
-          <span class="card-step">Step 01 · Cleanse</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -706,7 +702,6 @@
 
       <div class="card" data-product="hydrating-toner">
         <div class="card-pic" style="background-color:#E6EFE9;background-image:url('project/assets/products/hydrating-toner-front-alt.jpg')">
-          <span class="card-step">Step 02 · Tone</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -721,7 +716,6 @@
 
       <div class="card" data-product="vitamin-c-serum">
         <div class="card-pic" style="background-color:#FCEAD0;background-image:url('project/assets/products/vitamin-c-serum-front-alt.jpg')">
-          <span class="card-step">Step 03 · Treat · AM</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -736,7 +730,6 @@
 
       <div class="card" data-product="peptide-serum">
         <div class="card-pic" style="background-color:#FCEAD0;background-image:url('project/assets/products/peptide-serum-front.jpg')">
-          <span class="card-step">Step 03 · Treat · AM/PM</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -751,7 +744,6 @@
 
       <div class="card" data-product="retinol-alt-serum">
         <div class="card-pic" style="background-color:#FCEAD0;background-image:url('project/assets/products/retinol-alt-serum-front.jpg')">
-          <span class="card-step">Step 03 · Treat · PM</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -766,7 +758,6 @@
 
       <div class="card" data-product="firming-day-cream">
         <div class="card-pic" style="background-color:#FCE8EB;background-image:url('project/assets/products/firming-day-cream-front.jpg')">
-          <span class="card-step">Step 04 · Moisturise · AM</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -781,7 +772,6 @@
 
       <div class="card" data-product="ceramide-night-cream">
         <div class="card-pic" style="background-color:#FCE8EB;background-image:url('project/assets/products/ceramide-night-cream-front-alt.jpg')">
-          <span class="card-step">Step 05 · Moisturise · PM</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -796,7 +786,6 @@
 
       <div class="card" data-product="smoothing-eye-cream">
         <div class="card-pic" style="background-color:#EBE9F5;background-image:url('project/assets/products/smoothing-eye-cream-front.jpg')">
-          <span class="card-step">Targeted · Eye</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -811,7 +800,6 @@
 
       <div class="card" data-product="spf50-stick">
         <div class="card-pic" style="background-color:#FAF7C9;background-image:url('project/assets/products/spf50-stick-front.jpg')">
-          <span class="card-step">Step · Protect</span>
           <span class="card-heart"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/></svg></span>
         </div>
         <div class="card-meta">
@@ -835,13 +823,13 @@
     </div>
     <div class="about-body">
       <div class="eyebrow">Our story</div>
-      <h3>I know what it feels like to search<br/>— really search — for something<br/>that finally works.</h3>
+      <h3>Beauty isn't something you apply.<br/><em>It's something you live.</em></h3>
       <p>For years, my own skin was my biggest frustration. I tried everything, trusted too many labels, and felt lost in an industry that made everything more complicated than it needed to be.</p>
       <p>SESE was born from that search. From the belief that your skin deserves honest care — not quick fixes or empty promises. And that true beauty has no expiry date.</p>
       <p>At every age, you deserve to feel like yourself. Radiant, cared for, and completely at ease in your own skin.</p>
       <p class="sig">— Séphora, founder of SESE</p>
       <div class="links">
-        <button class="btn btn--dark">Read our story <span class="arrow">→</span></button>
+        <a class="btn btn--dark" href="about.html">Read our story <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -876,7 +864,7 @@
 
   <!-- Ritual bundles -->
   <section class="rituals">
-    <a class="ritual ritual--night" data-product="beauty-sleep-ritual" href="#">
+    <a class="ritual ritual--night" data-product="beauty-sleep-ritual" href="product.html?p=beauty-sleep-ritual">
       <div class="ritual-head">
         <span class="ritual-label">Night ritual</span>
         <h3>The Beauty<br/><em>Sleep Ritual.</em></h3>
@@ -890,7 +878,7 @@
       </div>
     </a>
 
-    <a class="ritual ritual--full" data-product="full-ritual" href="#">
+    <a class="ritual ritual--full" data-product="full-ritual" href="product.html?p=full-ritual">
       <div class="ritual-head">
         <span class="ritual-label">Complete edit</span>
         <h3>The Full<br/><em>Ritual.</em></h3>
@@ -913,11 +901,11 @@
       <h2>The latest <em>read.</em></h2>
     </div>
     <div class="head-aside">
-      <a href="#">All articles →</a>
+      <a href="blog.html">All articles →</a>
     </div>
   </div>
 
-  <a class="journal" href="#">
+  <a class="journal" href="blog-post.html?p=1">
     <div class="journal-cover">
       <div class="ph">[journal cover — hands &amp; serum · golden hour]</div>
       <div class="meta-top">
@@ -940,9 +928,9 @@
 
   <div class="journal-foot">
     <span>Also recent in the journal</span>
-    <span><a href="#">What peptides actually do (and don't) →</a></span>
-    <span><a href="#">Aging on your own terms →</a></span>
-    <span><a href="#">Visit the journal →</a></span>
+    <span><a href="blog-post.html?p=2">What peptides actually do (and don't) →</a></span>
+    <span><a href="blog-post.html?p=3">Aging on your own terms →</a></span>
+    <span><a href="blog.html">Visit the journal →</a></span>
   </div>
 
 </div><!-- /.page -->
@@ -983,10 +971,10 @@
       <div class="foot-col">
         <h5>Klantenservice</h5>
         <ul>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Shipping &amp; Delivery</a></li>
-          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="shipping.html">Shipping &amp; Delivery</a></li>
+          <li><a href="returns.html">Returns &amp; Refunds</a></li>
           <li><a href="#">Track my order</a></li>
         </ul>
       </div>
@@ -996,11 +984,11 @@
       <div class="foot-col">
         <h5>Beleid &amp; info</h5>
         <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms &amp; Conditions</a></li>
-          <li><a href="#">Right of Withdrawal</a></li>
-          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="withdrawal.html">Right of Withdrawal</a></li>
+          <li><a href="cookie-policy.html">Cookie Policy</a></li>
         </ul>
       </div>
 

@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Journal — SESE</title>
+  <meta name="description" content="Skincare stories and honest advice from SESE." />
+  <style>
+    @font-face {
+      font-family: "Todes";
+      src: url("project/fonts/Todes-Light.otf") format("opentype");
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --blue:         #3A7D94;
+      --blue-dark:    #2A5C70;
+      --green:        #4E7A4E;
+      --sand:         #E8D5B0;
+      --warm-white:   #FAF5EC;
+      --ink:          #1A1A1A;
+      --ink-2:        #4A4A47;
+      --ink-3:        #7A7770;
+      --bg-page:      #FFFFFF;
+      --bg-nav:       #FAF5EC;
+      --line-soft:    rgba(26,26,26,0.08);
+      --line-default: rgba(26,26,26,0.16);
+      --line-strong:  rgba(26,26,26,0.28);
+      --font-display: "Todes","Cormorant Garamond","Times New Roman",serif;
+      --font-ui:      "Inter","Helvetica Neue",system-ui,sans-serif;
+      --ease-out:     cubic-bezier(0.22,0.61,0.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; padding: 0; }
+    img { display: block; max-width: 100%; }
+
+    .page { max-width: 1440px; margin: 0 auto; background: var(--bg-page); }
+
+    /* ── Announcement ── */
+    .announce {
+      background: var(--blue);
+      color: #FFFCF5;
+      text-align: center;
+      padding: 11px 0;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .announce .dot { opacity: 0.45; margin: 0 16px; }
+
+    /* ── Nav ── */
+    .nav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 26px 56px;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .wordmark { font-size: 26px; letter-spacing: 0.34em; color: var(--ink); }
+    .nav-center {
+      display: inline-flex; gap: 36px;
+      font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .nav-center a {
+      position: relative; padding: 6px 0;
+      transition: color .28s var(--ease-out);
+    }
+    .nav-center a::after {
+      content: ""; position: absolute; left: 50%; bottom: -2px;
+      transform: translateX(-50%);
+      width: 0; height: 1px; background: var(--ink);
+      transition: width .32s var(--ease-out);
+    }
+    .nav-center a:hover { color: var(--ink); }
+    .nav-center a:hover::after { width: 22px; }
+    .nav-right {
+      display: flex; justify-content: flex-end; align-items: center;
+      gap: 22px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .cart-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--line-default) !important;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background .28s var(--ease-out);
+      color: var(--ink-2);
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      font-family: var(--font-display); font-weight: 300;
+    }
+    .cart-btn:hover { background: rgba(26,26,26,0.04); }
+    .cart-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); display: inline-block; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      padding: 24px 56px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3);
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .breadcrumb a { color: var(--ink-3); transition: color .28s var(--ease-out); }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb .sep { opacity: 0.4; }
+    .breadcrumb .current { color: var(--ink-2); }
+
+    /* ── Article header ── */
+    .article-header {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 72px 56px 48px;
+    }
+    .article-meta {
+      font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 24px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .article-meta .sep { opacity: 0.4; }
+    .article-header h1 {
+      margin: 0 0 28px;
+      font-size: 56px; line-height: 1.04; font-weight: 300; letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+    .article-lead {
+      font-style: italic;
+      font-size: 20px; line-height: 1.7;
+      color: var(--ink-2);
+      margin: 0;
+      border-left: 2px solid var(--line-default);
+      padding-left: 24px;
+    }
+
+    /* ── Article image ── */
+    .article-image {
+      max-width: 820px;
+      margin: 0 auto 0;
+      padding: 40px 56px;
+    }
+    .article-image .img-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16/7;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+    .article-image .img-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(155deg, #EFDFC2 0%, #D9BE8E 100%);
+      background-size: cover; background-position: center;
+    }
+
+    /* ── Article body ── */
+    .article-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8px 56px 80px;
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--ink-2);
+    }
+    .article-body p {
+      margin: 0 0 24px;
+    }
+    .article-body h2 {
+      margin: 48px 0 18px;
+      font-size: 30px; font-weight: 300; line-height: 1.2;
+      color: var(--ink); letter-spacing: 0.01em;
+    }
+    .article-body h3 {
+      margin: 36px 0 14px;
+      font-size: 22px; font-weight: 300; line-height: 1.3;
+      color: var(--ink); letter-spacing: 0.01em;
+    }
+    .article-body strong {
+      font-weight: 400; color: var(--ink);
+    }
+    .article-body em {
+      font-style: italic;
+    }
+    .article-body ul {
+      margin: 0 0 24px;
+      padding-left: 0;
+      list-style: none;
+    }
+    .article-body ul li {
+      padding: 6px 0 6px 20px;
+      position: relative;
+    }
+    .article-body ul li::before {
+      content: "—";
+      position: absolute; left: 0;
+      color: var(--ink-3);
+    }
+
+    /* ── Article divider ── */
+    .article-divider {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 56px;
+      border: 0;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    /* ── Related posts ── */
+    .related-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 56px 80px;
+    }
+    .related-label {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 40px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .related-label::before { content: ""; width: 22px; height: 1px; background: var(--ink-3); }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .related-card {
+      display: flex; flex-direction: column;
+      padding-top: 20px;
+      border-top: 1px solid var(--line-soft);
+    }
+    .related-card-date {
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3); margin-bottom: 12px;
+    }
+    .related-card h4 {
+      margin: 0 0 10px;
+      font-size: 19px; font-weight: 300; line-height: 1.3;
+      color: var(--ink);
+      transition: color .28s var(--ease-out);
+    }
+    .related-card:hover h4 { color: var(--blue); }
+    .related-card-link {
+      margin-top: auto;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--ink-3); padding-top: 14px;
+      transition: color .28s var(--ease-out);
+    }
+    .related-card:hover .related-card-link { color: var(--ink); }
+
+    /* ── CTA section ── */
+    .article-cta {
+      background: var(--warm-white);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      padding: 64px 56px;
+      text-align: center;
+    }
+    .article-cta p {
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--ink-3); margin: 0 0 20px;
+    }
+    .article-cta h3 {
+      margin: 0 0 32px;
+      font-size: 38px; font-weight: 300; line-height: 1.1;
+      color: var(--ink);
+    }
+    .article-cta h3 em { font-style: italic; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 16px 32px;
+      border-radius: 999px;
+      background: var(--ink); color: #FFFCF5;
+      font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase;
+      font-family: var(--font-display); font-weight: 300;
+      transition: background .28s var(--ease-out);
+    }
+    .btn-cta:hover { background: #2A2A2A; }
+
+    /* ── Footer ── */
+    .foot-wrap { background: var(--sand); color: #2A2620; }
+    .foot-top {
+      padding: 80px 56px 56px;
+      display: grid;
+      grid-template-columns: 1.2fr 1px 1fr 1px 1fr;
+      gap: 48px; align-items: stretch;
+    }
+    .foot-divider { width: 1px; background: rgba(42,38,32,0.22); align-self: center; height: 60%; }
+    .foot-col h5 { margin: 0 0 22px; font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(42,38,32,0.6); font-weight: 300; }
+    .foot-wm { font-size: 30px; letter-spacing: 0.34em; color: #2A2620; margin-bottom: 18px; }
+    .foot-tag { font-style: italic; font-size: 18px; line-height: 1.5; color: #2A2620; max-width: 360px; margin-bottom: 32px; }
+    .foot-contact { font-size: 14px; line-height: 1.75; }
+    .foot-contact a { border-bottom: 1px solid rgba(42,38,32,0.25); }
+    .foot-contact a:hover { border-bottom-color: #2A2620; }
+    .foot-col ul { list-style: none; margin: 0; padding: 0; }
+    .foot-col li { padding: 6px 0; font-size: 15px; transition: opacity .28s var(--ease-out); }
+    .foot-col li a:hover { opacity: 0.6; }
+    .foot-bot {
+      border-top: 1px solid rgba(42,38,32,0.2);
+      padding: 24px 56px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px;
+      font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(42,38,32,0.7);
+    }
+    .pay { display: inline-flex; align-items: center; gap: 10px; }
+    .pay .chip {
+      padding: 6px 10px; background: rgba(255,255,255,0.4);
+      border: 1px solid rgba(42,38,32,0.18); border-radius: 6px;
+      font-size: 10px; letter-spacing: 0.18em; color: #2A2620;
+      font-family: var(--font-ui); font-weight: 500;
+    }
+    .lang-foot { display: inline-flex; gap: 10px; align-items: center; }
+    .lang-foot .sep { opacity: 0.4; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .nav { padding: 20px 32px; }
+      .breadcrumb { padding: 20px 32px; }
+      .article-header, .article-image, .article-body { padding-left: 32px; padding-right: 32px; }
+      .article-divider { padding-left: 32px; padding-right: 32px; }
+      .related-section { padding-left: 32px; padding-right: 32px; }
+      .article-cta { padding: 48px 32px; }
+      .foot-top { padding: 56px 32px 40px; }
+      .foot-bot { padding: 20px 32px 28px; }
+    }
+    @media (max-width: 720px) {
+      .nav { grid-template-columns: 1fr 1fr; padding: 18px 20px; }
+      .nav-center { display: none; }
+      .breadcrumb { padding: 16px 20px; }
+      .article-header { padding: 48px 20px 32px; }
+      .article-header h1 { font-size: 38px; }
+      .article-lead { font-size: 17px; }
+      .article-image { padding: 28px 20px; }
+      .article-body { padding: 8px 20px 60px; font-size: 16px; }
+      .related-section { padding: 48px 20px 60px; }
+      .related-grid { grid-template-columns: 1fr; gap: 28px; }
+      .article-cta { padding: 48px 20px; }
+      .article-cta h3 { font-size: 28px; }
+      .foot-top { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px 36px; }
+      .foot-divider { display: none; }
+      .foot-bot { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px 20px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Announcement -->
+  <div class="announce">
+    <span>Free shipping over €100</span>
+    <span class="dot">·</span>
+    <span>All products COSMOS Natural Certified</span>
+    <span class="dot">·</span>
+    <span>Vegan</span>
+  </div>
+
+  <!-- Nav -->
+  <header class="nav">
+    <a href="index.html" class="wordmark">S E S E</a>
+    <nav class="nav-center">
+      <a href="collection.html">Shop</a>
+      <a href="#">Routines</a>
+      <a href="#">Cleanse &amp; Prep</a>
+      <a href="#">Serums</a>
+      <a href="#">Moisturize</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="nav-right">
+      <span>EN · NL · FR</span>
+      <button class="cart-btn">
+        <span class="cart-dot"></span>
+        <span>Cart · 0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" id="breadcrumb">
+    <a href="blog.html">Journal</a>
+    <span class="sep">/</span>
+    <span class="current" id="breadcrumb-title">Loading…</span>
+  </div>
+
+  <!-- Article content rendered by JS -->
+  <article id="article-container"></article>
+
+  <!-- Related posts -->
+  <div class="related-section" id="related-section"></div>
+
+  <!-- CTA -->
+  <div class="article-cta">
+    <p>From the journal</p>
+    <h3>Ready to start your<br/><em>skincare ritual?</em></h3>
+    <a href="collection.html" class="btn-cta">Discover our products →</a>
+  </div>
+
+</div><!-- /.page -->
+
+<!-- Footer -->
+<footer class="foot-wrap">
+  <div class="page">
+    <div class="foot-top">
+
+      <div class="foot-col">
+        <div class="foot-wm">S E S E</div>
+        <div class="foot-tag">Unlock your skin's <em>timeless beauty.</em></div>
+        <div class="foot-contact">
+          <a href="mailto:customerservice@sese.be">customerservice@sese.be</a>
+        </div>
+      </div>
+
+      <div class="foot-divider"></div>
+
+      <div class="foot-col">
+        <h5>Klantenservice</h5>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#">Shipping &amp; Delivery</a></li>
+          <li><a href="#">Returns &amp; Refunds</a></li>
+          <li><a href="#">Track my order</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-divider"></div>
+
+      <div class="foot-col">
+        <h5>Beleid &amp; Info</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms &amp; Conditions</a></li>
+          <li><a href="#">Right of Withdrawal</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="foot-bot">
+      <div>© 2026 SESE · Based in Belgium</div>
+      <div class="pay">
+        <span class="chip">VISA</span>
+        <span class="chip">Mastercard</span>
+        <span class="chip">Bancontact</span>
+        <span class="chip">PayPal</span>
+        <span class="chip">Apple&nbsp;Pay</span>
+      </div>
+      <div class="lang-foot">
+        <span>NL</span><span class="sep">·</span><span style="color:#2A2620;font-weight:400">EN</span><span class="sep">·</span><span>FR</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// =============================================================
+//  Blog post data — all 10 articles
+// =============================================================
+const POSTS = [
+  {
+    id: 1,
+    title: "How to build an anti-aging routine from scratch",
+    date: "June 2026",
+    readtime: "7 min read",
+    excerpt: "The five steps that make the difference. No complicated protocols, no expensive extras — just the right foundation, in the right order.",
+    image: "project/assets/products/peptide-serum-studio.jpg",
+    fullBody: `<p>There is a version of skincare that costs a lot, asks a lot, and delivers very little. Twelve steps. Six serums. A different product for every concern and every season. You know this version. You may have tried it.</p>
+
+<p>Then there is the other kind. Simple, intentional, consistent. Five steps that fit into a real morning and a real evening. The kind of routine that your skin can actually feel the benefit of — because you keep doing it.</p>
+
+<p>This is what SESE was built around. And this is how to build it.</p>
+
+<h2>Step 1: Cleanse properly — which means gently</h2>
+
+<p>Everything starts here. A good cleanser removes what the day — or night — has left behind without taking anything your skin actually needs. That means no stripping, no tight feeling, no residue. If your skin feels squeaky-clean after cleansing, that is not a good sign. It means the barrier has been disrupted.</p>
+
+<p>Look for a gel-to-foam or milk formula that respects the skin's natural pH. Use it morning and evening. In the morning, a lighter cleanse is usually enough — you are simply refreshing from sleep, not undoing a full day of SPF and pollution. In the evening, take your time.</p>
+
+<h2>Step 2: Tone — but not the old way</h2>
+
+<p>The toner of the 1990s was mostly alcohol and astringents. The modern hydrating toner is something else entirely: a lightweight mist that prepares the skin to absorb what comes next, adds the first layer of hydration, and rebalances the surface after cleansing. Think of it as priming.</p>
+
+<p>Apply it while your skin is still slightly damp. Pat rather than wipe. Give it thirty seconds before moving on.</p>
+
+<h2>Step 3: Treat with an active serum</h2>
+
+<p>This is where the work happens. Serums carry a higher concentration of active ingredients than any other step in your routine — and those actives are what actually produce visible change over time.</p>
+
+<p>For anti-aging specifically, you want one or more of the following: Vitamin C in the morning for brightness and protection, peptides morning or evening for firmness and elasticity, and a retinol alternative in the evening for cell turnover without irritation.</p>
+
+<p>The key word is patience. Serums do not produce overnight results. What they do is produce lasting, cumulative results when used consistently over weeks and months. Give any new treatment serum at least eight weeks before making a judgement.</p>
+
+<h2>Step 4: Moisturise to seal and support</h2>
+
+<p>Moisturiser does two things: it delivers hydration, and it seals in everything you have applied before it. This is the occlusive step — the one that locks the previous layers against your skin and prevents transepidermal water loss throughout the day or overnight.</p>
+
+<p>Your morning and evening moisturisers can be different. A day cream tends to be lighter, often with added protection or brightening properties. A night cream is richer, working with the skin's own repair cycle to restore and nourish while you sleep.</p>
+
+<h2>Step 5: Protect (AM only)</h2>
+
+<p>Sun protection is the most consequential step in any anti-aging routine. Full stop. Without it, every other product you use is working against UV damage that is happening daily, in every season, through windows as well as direct sunlight.</p>
+
+<p>SPF 50 or above, every morning, reapplied through the day if you are spending time outdoors. A mineral-based stick is easy to reapply over makeup without disrupting your look.</p>
+
+<h2>The rhythm matters as much as the products</h2>
+
+<p>A routine you do every day at 70% effort outperforms a routine you do three times a week at 100%. Consistency is the active ingredient that no formula can provide. Build the habit first — and let the results follow.</p>`
+  },
+  {
+    id: 2,
+    title: "Why peptides are the gentle path to firmer skin",
+    date: "June 2026",
+    readtime: "5 min read",
+    excerpt: "Retinol gets all the press. But for skin that wants results without a reaction, peptides are the quieter, smarter choice.",
+    image: null,
+    fullBody: `<p>When people talk about anti-aging ingredients, retinol tends to dominate the conversation. It works — that part is true. But it also comes with a list of conditions: introduce it slowly, expect peeling, avoid sun exposure, do not use it near your eyes, pause if you are pregnant.</p>
+
+<p>Peptides ask none of that. And for most people's skin, they deliver results that are every bit as meaningful.</p>
+
+<h2>What peptides actually are</h2>
+
+<p>Peptides are short chains of amino acids — the same building blocks that make up proteins, including the proteins in your skin. Collagen, for instance, is a protein. When it breaks down with age, the skin loses the structural support that keeps it firm and smooth.</p>
+
+<p>Peptide molecules can signal to the skin that collagen has been lost, prompting the production of new collagen. They can also penetrate more deeply than many other ingredients because of their small molecular size, working at the level where structural change actually happens.</p>
+
+<h2>What they do for aging skin specifically</h2>
+
+<p>The primary benefit is improved firmness over time. Not overnight — peptides are not dramatic in their timeline — but after six to twelve weeks of consistent use, most people notice that their skin holds its contours better. Fine lines soften. The face looks less deflated.</p>
+
+<p>There is also a hydration benefit. Many peptide formulas include supporting ingredients that strengthen the skin's barrier, which means better moisture retention and a more resilient surface. That translates to skin that looks plumper and behaves more calmly.</p>
+
+<h2>Why gentle matters</h2>
+
+<p>The skin's barrier is not just a cosmetic concern. It is the skin's primary defence system — against pollution, bacteria, UV, and moisture loss. Ingredients that compromise it in pursuit of quick results are borrowing against the skin's long-term health.</p>
+
+<p>Peptides work without disrupting the barrier. They fit into the skin's own language of repair and regeneration, supporting processes that already exist rather than forcing reactions from the outside. For sensitive skin, reactive skin, and anyone who has ever had a bad experience with aggressive actives, this is a genuine advantage.</p>
+
+<h2>Using peptides in your routine</h2>
+
+<p>A peptide serum is versatile: suitable for morning or evening, compatible with most other actives, and gentle enough for daily use from the very first application. Apply it after cleansing and toning, before your moisturiser.</p>
+
+<p>If you do use retinol in your evening routine, peptides make an excellent morning counterpart — delivering similar long-term firming benefits without doubling up on intensity. If you prefer to avoid retinol entirely, a peptide serum is more than sufficient for meaningful anti-aging results on its own.</p>
+
+<p>The quieter ingredients often do the most sustained work. Peptides are a good example of that.</p>`
+  },
+  {
+    id: 3,
+    title: "The truth about Vitamin C: what your skin actually needs to know",
+    date: "June 2026",
+    readtime: "6 min read",
+    excerpt: "Stable, effective, and worth every morning. Here is what the research says — and what to ignore.",
+    image: null,
+    fullBody: `<p>Few skincare ingredients have been marketed as aggressively as Vitamin C. Serums that promise to reverse years of damage in a week. Claims that verge on the miraculous. Prices that range from affordable to extraordinary, with seemingly no correlation to what is actually inside.</p>
+
+<p>The research on Vitamin C is genuinely strong. But that research applies to a specific form of the ingredient, in specific concentrations, in formulas designed to keep it stable. Here is what you actually need to know.</p>
+
+<h2>What Vitamin C does — the real story</h2>
+
+<p>Vitamin C, in its most studied form as L-ascorbic acid, is a powerful antioxidant. It neutralises free radicals — the unstable molecules generated by UV exposure, pollution, and normal cellular metabolism that cause oxidative stress and accelerate visible aging.</p>
+
+<p>It also plays a direct role in collagen synthesis. Without adequate Vitamin C, the skin cannot produce collagen effectively. Applied topically at sufficient concentrations, it stimulates the skin's own collagen production and contributes to firmer, more even-toned skin over time.</p>
+
+<p>And it brightens. Vitamin C inhibits the enzyme responsible for melanin production, which means consistent use reduces dark spots, post-inflammatory marks, and uneven pigmentation. The results are gradual but cumulative and genuinely effective.</p>
+
+<h2>The stability problem — and why it matters</h2>
+
+<p>L-ascorbic acid is notoriously unstable. It oxidises on contact with air and light, turning an orange or brown colour — and oxidised Vitamin C not only loses its efficacy but can actually become a pro-oxidant, doing the opposite of what you want.</p>
+
+<p>This is why the quality of formulation matters so much. A well-made Vitamin C serum uses stabilised forms of the ingredient, is packaged in airtight opaque or dark glass packaging, and maintains an acidic pH (around 3.5) that supports absorption. If your serum has turned distinctly orange and you bought it six months ago, it is time for a new one.</p>
+
+<h2>Concentration — what is actually useful</h2>
+
+<p>Studies suggest that concentrations between 10% and 20% are effective for most skin types. Above 20%, the benefit does not increase significantly, but the irritation potential does. Below 10%, the concentration may be too low to produce meaningful results.</p>
+
+<p>If you have sensitive or reactive skin, start at the lower end. Apply it every other day until your skin acclimates, then build to daily use.</p>
+
+<h2>When and how to use it</h2>
+
+<p>Morning is the right time for Vitamin C. Its antioxidant properties make it a natural complement to your SPF — together, they provide layered protection against UV-induced damage. Apply your serum after toning, give it a minute to absorb, then apply your moisturiser and SPF over the top.</p>
+
+<p>Be patient. Brightening results typically take four to eight weeks to become visible. Collagen support is a longer-term benefit that builds over months. The ingredient rewards consistency, not urgency.</p>`
+  },
+  {
+    id: 4,
+    title: "SPF every day: why sun protection is the best anti-aging investment you can make",
+    date: "June 2026",
+    readtime: "5 min read",
+    excerpt: "80% of visible skin aging comes from UV. Everything else in your routine depends on this one step.",
+    image: null,
+    fullBody: `<p>If you could only do one thing for your skin — one product, one step, one daily habit — it would be this: apply SPF 50 every morning, without exception.</p>
+
+<p>Not because it is the most interesting step. Not because it makes your skin glow or feel soft. But because without it, everything else you do is undermined by the most significant external cause of visible skin aging: ultraviolet radiation.</p>
+
+<h2>The research is unambiguous</h2>
+
+<p>Studies estimate that approximately 80% of visible facial aging — wrinkles, pigmentation, loss of firmness, uneven texture — is attributable to UV exposure rather than chronological age. This is sometimes called photoaging, and it is cumulative and progressive. Every day you spend without sun protection, it continues.</p>
+
+<p>The damage happens year-round, in every season, and often through windows. UVA rays, which penetrate more deeply and are responsible for the majority of photoaging, are present at consistent levels regardless of cloud cover. You do not need to be sitting in direct sunlight for the damage to occur.</p>
+
+<h2>SPF 50 and above</h2>
+
+<p>SPF 30 blocks approximately 97% of UVB rays. SPF 50 blocks approximately 98%. The difference sounds small, but over years of daily use, it adds up — and at the cost of one extra step in the morning, there is no reason not to use the higher protection.</p>
+
+<p>Look for broad-spectrum formulas that protect against both UVA and UVB. In Europe, a product labelled SPF 50 must meet UVA protection standards as well, but checking for the UVA seal or "broad spectrum" language is still good practice.</p>
+
+<h2>Reapplication — the step most people skip</h2>
+
+<p>A single morning application provides meaningful protection, but it diminishes through the day — from sweating, touching the face, and simply the passage of time. For days when you are spending significant time outdoors, reapplication every two hours matters. A mineral stick formula makes this practical: apply directly over makeup without disruption.</p>
+
+<h2>It works for everyone</h2>
+
+<p>There is a persistent myth that darker skin tones do not need as much sun protection. This is false. Melanin does provide some natural protection — darker skin has a natural SPF roughly equivalent to 13 — but this is not sufficient to prevent photoaging or, more importantly, to protect against UV-induced DNA damage. Sun protection is a universal recommendation, not a preference.</p>
+
+<h2>The relationship with the rest of your routine</h2>
+
+<p>Think of SPF as the protective layer that makes your entire routine worth doing. Your Vitamin C serum fights existing oxidative damage; your peptide serum supports collagen; your retinol alternative promotes cell turnover. Without SPF, UV continues to cause new damage faster than those ingredients can address it.</p>
+
+<p>Every product in your routine performs better — delivers better results over time — when daily sun protection is part of the foundation.</p>`
+  },
+  {
+    id: 5,
+    title: "How to layer skincare products correctly",
+    date: "June 2026",
+    readtime: "5 min read",
+    excerpt: "Lightest to heaviest. Actives before occlusives. There is a logic to the order — and it makes everything work better.",
+    image: "project/assets/products/vitamin-c-serum-studio.jpg",
+    fullBody: `<p>The order in which you apply your skincare products is not arbitrary. There is a logic to it — one rooted in how the skin absorbs different substances, how ingredients interact with each other, and what each product is designed to do. Get the order right and your routine becomes significantly more effective. Get it wrong and you may be reducing the benefit of products you are spending real money on.</p>
+
+<p>The general principle is simple: lightest to heaviest, water-based before oil-based, actives before occlusives.</p>
+
+<h2>Start with a clean base</h2>
+
+<p>Before anything else, cleanse. Products applied to uncleansed skin have to penetrate through a layer of sebum, dead cells, SPF residue, and everything the day (or night) has added. A clean skin surface allows every subsequent product to reach where it needs to go.</p>
+
+<p>Follow with toner — the first layer of hydration and the step that primes the skin to absorb what follows. A hydrating toner applied to damp skin will be more effective than one applied to completely dry skin, so timing matters here.</p>
+
+<h2>Serums before moisturisers — always</h2>
+
+<p>This is the most commonly broken rule in skincare layering. Serums contain high concentrations of active ingredients in lightweight, fast-absorbing formulas. They are designed to penetrate deeply. Moisturisers, by contrast, are partially occlusive — they form a layer over the skin's surface to seal in what is beneath them and prevent moisture loss.</p>
+
+<p>If you apply moisturiser before your serum, you are putting a partial barrier between the serum and the skin. The serum's active ingredients cannot penetrate as effectively. Always apply your serum first, give it at least a minute to absorb, then apply your moisturiser on top.</p>
+
+<h2>Multiple serums: lightest first</h2>
+
+<p>If you use more than one serum — a Vitamin C serum in the morning alongside a peptide serum, for example — apply the thinner, more watery one first and the thicker one second. This ensures both reach the skin effectively rather than the thicker formula blocking the thinner one.</p>
+
+<h2>Oil-based products last (before SPF)</h2>
+
+<p>Any oil-based products — facial oils, oil-rich balms — should come after your water-based serum and moisturiser and before your SPF. Oils cannot pass through a water-based layer once that layer has been applied; water-based products can penetrate through a light oil layer in principle, but why create the obstacle? Keep oil-based formulas close to last in your routine.</p>
+
+<h2>SPF seals the morning routine</h2>
+
+<p>Your morning routine should end with SPF. It is the final layer — protective rather than penetrating — and it belongs on top of everything else. Nothing should be applied over SPF except makeup, and nothing water-based should be applied under it after the SPF has been given a few minutes to set.</p>
+
+<h2>Evening: the same logic, without SPF</h2>
+
+<p>The evening routine follows the same sequence: cleanser, toner, serum (or serums), moisturiser. If you use a retinol alternative, this goes in the serum step. Your night cream replaces the day cream and SPF. That is all.</p>
+
+<p>A well-ordered five-minute routine will outperform a ten-product routine applied in the wrong sequence. Order is not a detail — it is part of the formula.</p>`
+  },
+  {
+    id: 6,
+    title: "The difference between moisturising and barrier repair",
+    date: "June 2026",
+    readtime: "5 min read",
+    excerpt: "Hydration gets in. The barrier keeps it there. Understanding the difference changes how you shop for skincare.",
+    image: null,
+    fullBody: `<p>Walk into any pharmacy or browse any skincare website and you will encounter both hydrating products and barrier-repair products. They often sit near each other. They may look similar. But they do different things — and understanding the difference will change how you read ingredient lists and make purchasing decisions.</p>
+
+<h2>What moisturising does</h2>
+
+<p>Moisturising, in the most direct sense, means adding water to the skin. This happens through two mechanisms: humectants draw water into the skin from the environment (or from deeper skin layers), and occlusives create a physical barrier on the skin's surface that slows the rate at which water evaporates.</p>
+
+<p>Ingredients like hyaluronic acid, glycerin, and aloe vera are humectants — they attract and hold water. Shea butter, squalane, and dimethicone are occlusives — they seal the surface. Most good moisturisers contain both.</p>
+
+<p>When your skin feels tight, dry, or dull, it is often dehydrated — short on water content. A good moisturiser addresses this directly. You will typically notice results within hours: the skin feels plumper, looks more alive, and reflects light better.</p>
+
+<h2>What barrier repair means</h2>
+
+<p>The skin barrier — the stratum corneum — is the outermost layer of the skin. Think of it as a brick wall: skin cells are the bricks, and the lipid matrix between them (ceramides, fatty acids, cholesterol) is the mortar. When this structure is intact, it keeps water in and irritants, bacteria, and pollution out. When it is compromised, both happen in reverse.</p>
+
+<p>A damaged barrier is not just a hydration problem. It is a structural problem. And while a good moisturiser helps, what a damaged barrier actually needs is the repair of that lipid matrix. This means ceramides, fatty acids (particularly linoleic acid), and cholesterol — ingredients that physically integrate into the barrier structure and reinforce it.</p>
+
+<h2>How to tell which one your skin needs</h2>
+
+<p>If your skin is temporarily dry — tight after cleansing, dull in winter, dehydrated from travel — a hydrating serum and a good moisturiser will likely resolve it within days.</p>
+
+<p>If your skin is persistently reactive, prone to redness, sensitive to products it has tolerated in the past, or if it stings when you apply things that should not sting, the barrier may be compromised. This requires a different approach: a gentler cleanser, fewer actives for a period, and specifically a ceramide-rich moisturiser or barrier repair product that addresses the structural deficit.</p>
+
+<h2>The ceramide advantage</h2>
+
+<p>Ceramides are not a trend. They are a foundational component of the skin's own structure. Ceramide levels decline with age — which is one of the reasons that aging skin tends to be drier, more reactive, and less resilient. A ceramide-rich night cream is not just moisturising; it is actively contributing to the skin's structural integrity.</p>
+
+<p>Combine ceramides with humectants for both immediate hydration and long-term barrier support. That combination — sealed in with a good occlusive layer — is what gives the skin what it needs to stay resilient through every season and every decade.</p>`
+  },
+  {
+    id: 7,
+    title: "What COSMOS Natural means — and why it matters for your skin",
+    date: "June 2026",
+    readtime: "6 min read",
+    excerpt: "A certification with teeth. Here is what it requires, what it excludes, and why it is worth looking for.",
+    image: null,
+    fullBody: `<p>Natural skincare claims are easy to make and difficult to verify. "Clean." "Green." "Botanical." These are words that appear on packaging without any standardised definition, any independent verification, or any requirement to substantiate them. A brand can call its products natural while using synthetic preservatives, petrochemical derivatives, or formulations that would be prohibited under genuine natural standards.</p>
+
+<p>COSMOS Natural certification is different. It is a rigorous, independently audited standard developed by a consortium of European certifying bodies — Ecocert, BDIH, Cosmebio, Soil Association, and ICEA. It defines what "natural" actually means in cosmetics, and it requires third-party verification at every stage of the supply chain.</p>
+
+<h2>What COSMOS Natural requires</h2>
+
+<p>Under the COSMOS standard, at least 95% of all plant-based ingredients must be organically produced. The percentage of total ingredients that must be natural depends on the product type, but the formula is clear and independently verified — not self-reported.</p>
+
+<p>Physical and biological processing is permitted. Certain carefully regulated chemical transformations are allowed where necessary. But a broad list of synthetic ingredients is prohibited entirely: silicones, parabens, PEGs, synthetic fragrances, GMOs, and a range of other substances that appear regularly in conventional skincare.</p>
+
+<h2>What it excludes — and why that matters</h2>
+
+<p>The prohibited list in COSMOS certification covers many of the ingredients that consumers are most concerned about. Parabens, which are widely used as preservatives and have been the subject of ongoing regulatory scrutiny, are not permitted. Synthetic fragrances — a common cause of skin sensitisation and allergic reactions — are excluded. PEGs (polyethylene glycols), which are derived from petroleum and used as emulsifiers, are not allowed.</p>
+
+<p>For the skin, this matters for a practical reason: fewer potential irritants means a lower likelihood of sensitisation over time. Some synthetic ingredients cause no issues for most people. Others have cumulative effects that only become apparent after years of use. The COSMOS standard removes that uncertainty for a significant portion of the ingredient list.</p>
+
+<h2>Third-party verification</h2>
+
+<p>The certification is not self-awarded. An independent certifying body audits the supply chain, the formulations, and the manufacturing processes. Brands pay for this audit and must maintain compliance to retain the certification. The COSMOS logo on packaging represents a verifiable claim — not a marketing position.</p>
+
+<h2>What it means for an anti-aging routine</h2>
+
+<p>There is sometimes an assumption that natural formulations cannot deliver the actives needed for meaningful anti-aging results. This is worth questioning. Many of the most well-researched anti-aging ingredients — peptides, certain Vitamin C derivatives, ceramides, botanical extracts with proven antioxidant activity — are compatible with natural certification standards.</p>
+
+<p>A COSMOS certified anti-aging routine is not a compromise. It is a commitment to formulations that are both effective and independently verified to be what they claim to be. That is not a small thing in an industry where claims are cheap and scrutiny is rare.</p>`
+  },
+  {
+    id: 8,
+    title: "What your skin does while you sleep (and how to support it)",
+    date: "June 2026",
+    readtime: "5 min read",
+    excerpt: "The regeneration cycle. The repair window. Why your night cream matters more than your morning one.",
+    image: null,
+    fullBody: `<p>Sleep is not passive time for your skin. It is, in fact, the period of most intense repair and regeneration — the window when the skin is freed from the work of protecting itself against the external environment and can focus its resources on restoration.</p>
+
+<p>Understanding what actually happens during those hours helps clarify not just why a good evening routine matters, but why the specific products you use at night should be chosen differently from those you use in the morning.</p>
+
+<h2>The repair cycle — what is happening at the cellular level</h2>
+
+<p>Cell division accelerates during sleep. The body produces significantly more growth hormone at night — growth hormone that drives tissue repair and the production of new cells throughout the body, including in the skin. Cell turnover, which slows with age, is at its most active between approximately 11pm and 4am.</p>
+
+<p>Blood flow to the skin also increases during sleep. This supports the delivery of nutrients and oxygen to skin cells and the removal of metabolic waste. The skin temperature rises slightly, which increases the permeability of the skin — meaning that topically applied ingredients are absorbed more readily during the night than during the day.</p>
+
+<h2>Transepidermal water loss at night</h2>
+
+<p>The skin loses more water at night than during the day, in part because the barrier is more permeable and in part because there is no moisturiser sitting on the surface being reapplied through the day. This is why night creams are typically richer and more occlusive than day creams — not because richness is inherently better, but because the additional occlusion is needed to compensate for increased overnight moisture loss.</p>
+
+<p>Applying your evening moisturiser shortly before sleep — rather than hours before — means the seal it provides is working during the hours of highest moisture loss.</p>
+
+<h2>Actives work harder at night</h2>
+
+<p>The increased skin permeability during sleep means that active ingredients applied at night have better access to the deeper skin layers where they do their work. This is one reason why retinol alternatives and cell-renewing actives are typically recommended for evening use: they benefit from the enhanced absorption window.</p>
+
+<p>It is also why fragrance and certain sensitising ingredients are more likely to cause reactions when used in the evening — the same permeability that allows beneficial ingredients deeper access also allows irritants in more readily. This is a reason to choose evening products with clean, well-tolerated formulas.</p>
+
+<h2>What a good evening routine looks like</h2>
+
+<p>Cleanse thoroughly — this is the more important cleanse, removing everything the day has deposited on your skin. Follow with a hydrating toner, then your treatment serum (peptide, Vitamin C if you reserve it for mornings is optional here, or a retinol alternative). Finish with a ceramide-rich night cream that seals in moisture, supports the barrier, and gives the skin the structural support it needs to do its overnight work.</p>
+
+<p>Then leave the skin alone. The repair cycle does not need assistance — it needs the right conditions to begin. That is all a good evening routine is for.</p>`
+  },
+  {
+    id: 9,
+    title: "How to choose the right serum for your skin type",
+    date: "June 2026",
+    readtime: "5 min read",
+    excerpt: "Three serums. Three different results. Here is the honest guide to knowing which one is for you.",
+    image: null,
+    fullBody: `<p>SESE has three treatment serums. Each one targets a different aspect of aging skin, works through a different mechanism, and suits different skin types and priorities. This is not a case of more is better — it is a case of understanding what your skin actually needs and choosing accordingly.</p>
+
+<p>You might use one. You might use two at different times of day. You might work through all three across different stages of your skincare practice. Here is what you need to know about each.</p>
+
+<h2>Vitamin C Serum — for brightness and protection</h2>
+
+<p><strong>Best for:</strong> dull skin, uneven tone, dark spots, and anyone who wants antioxidant protection as part of their morning routine.</p>
+
+<p>Vitamin C is a morning ingredient. It works synergistically with SPF to combat the oxidative stress caused by UV exposure, and it addresses the visible consequences of that stress — pigmentation, uneven tone, loss of radiance — through its effect on melanin production and collagen support.</p>
+
+<p>If your primary concern is brightness, evening out the skin tone, or supporting the effects of your SPF, Vitamin C is the serum to prioritise. It is also a good choice as a first treatment serum if you are new to actives and want to start with something that delivers visible results without irritation risk.</p>
+
+<p>Not ideal for: very reactive or sensitised skin at the outset — start every other day and build up.</p>
+
+<h2>Peptide Serum — for firmness and elasticity</h2>
+
+<p><strong>Best for:</strong> skin that is losing firmness, fine lines that have become more pronounced, anyone who wants long-term structural support without irritation.</p>
+
+<p>Peptides are versatile — morning or evening, compatible with essentially all other skincare ingredients, gentle enough for daily use from day one. Their mechanism of action is slower and more foundational than Vitamin C: they signal to the skin to produce more collagen, which builds over weeks and months into improved firmness and visible smoothing of lines.</p>
+
+<p>If you are building an anti-aging routine for the first time, a peptide serum is an excellent foundation — and it is the serum we would recommend for anyone who finds retinol or retinol alternatives too stimulating.</p>
+
+<h2>Retinol Alternative Serum — for cell renewal and line reduction</h2>
+
+<p><strong>Best for:</strong> skin that is ready for more targeted anti-aging treatment, particularly textural concerns, fine lines, and visible signs of reduced cell turnover.</p>
+
+<p>Our retinol alternative uses plant-derived compounds that work through a similar mechanism to retinol — stimulating cell renewal and collagen production — without the irritation, sensitivity, and photosensitivity associated with conventional retinoids. The results come more gradually, but they come without the adjustment period that makes many people abandon retinol-based routines.</p>
+
+<p>This is an evening serum. Apply it after toning, before your night cream, on days when your skin feels balanced and comfortable — daily if possible, every other day if your skin needs it.</p>
+
+<h2>Can you use more than one?</h2>
+
+<p>Yes — with care. Vitamin C in the morning and Retinol Alternative in the evening is a well-tolerated, effective combination for many people. Add Peptide Serum to either routine for enhanced firming support. The key is to listen to your skin and not chase more product with the assumption that more means better results. Consistent use of the right product matters far more than layering three serums at once.</p>`
+  },
+  {
+    id: 10,
+    title: "The Belgian coast beauty ritual: slow skincare for lasting results",
+    date: "June 2026",
+    readtime: "6 min read",
+    excerpt: "SESE was born from a very specific idea about how to care for skin. This is that idea, in full.",
+    image: null,
+    fullBody: `<p>There is something about the Belgian coast that slows time. The wide, flat horizon. The particular quality of northern light on the water. The way the wind demands a certain presence — you cannot be distracted on a beach in winter. You are simply there, and the weather makes that the only option.</p>
+
+<p>SESE was conceived in this context. Not as a response to a market gap or a formulation trend, but as a reflection of a particular way of thinking about care. Slow. Intentional. Without the noise of the industry that has built an entire infrastructure of urgency around something that should be simple.</p>
+
+<h2>What slow skincare actually means</h2>
+
+<p>Slow skincare is not about using fewer products or spending less time on your routine. It is about attention. About knowing what each product does and why it is there. About building a practice that is rooted in consistency rather than novelty.</p>
+
+<p>The skincare industry runs on newness. Every season, new launches. New "breakthrough" ingredients. New products that are positioned as upgrades to the ones you just bought. This cycle is commercially useful, but it is the opposite of what skin actually needs. Your skin does not benefit from constant change. It benefits from a stable, well-chosen routine maintained over years.</p>
+
+<h2>The Belgian approach to beauty</h2>
+
+<p>Belgium is not, in the global beauty narrative, a reference point the way France or Korea might be. But there is a quality to Belgian taste — across food, design, fashion, and the domestic arts — that is worth naming. It is restrained without being austere. It is precise without being cold. It values quality over status, and it tends toward the understated.</p>
+
+<p>These are the same values that guide SESE's formulations. Not the most expensive ingredients regardless of necessity, but the right ingredients at the right concentrations. Not packaging designed to impress on a shelf, but packaging designed to protect the formula inside. Not ten steps, but five — because five, done properly, is what works.</p>
+
+<h2>The coastal connection</h2>
+
+<p>The sea has long been associated with skin health. Thalassotherapy — the therapeutic use of seawater and marine elements — has roots in Belgian and French coastal towns that go back over a century. But SESE's connection to the coast is less clinical than that.</p>
+
+<p>It is about the light. The air. The unhurried relationship with time that the coast imposes. The idea that caring for your skin should feel like this — not rushed, not anxious, not driven by comparison or aspiration, but simply present. A few minutes in the morning. A few minutes at night. Products you trust, applied with intention.</p>
+
+<h2>What this means for how you approach your routine</h2>
+
+<p>It means removing the urgency. You are not trying to reverse ten years in ten days. You are building a practice that your skin will benefit from over a decade.</p>
+
+<p>It means ignoring most of what the industry tells you to worry about. Pores do not close. Skin does not "detox." Most of what gets marketed as a breakthrough is a reformulation of something that already existed. The fundamentals — cleanse, treat, moisturise, protect — do not change.</p>
+
+<p>And it means recognising that the ritual itself has value. Not just the outcome. The five minutes you take to care for your skin well are not just an investment in how your face looks in twenty years. They are a small act of presence in a day that asks for constant distraction. That is worth something too.</p>
+
+<p>This is what SESE was built around. And this is what we mean when we say: slow skincare for lasting results.</p>`
+  }
+];
+
+// =============================================================
+//  Render logic
+// =============================================================
+function getPostId() {
+  const params = new URLSearchParams(window.location.search);
+  const p = parseInt(params.get('p'), 10);
+  return (p >= 1 && p <= 10) ? p : 1;
+}
+
+function getRelated(currentId, count = 3) {
+  const others = POSTS.filter(p => p.id !== currentId);
+  // Pick a spread of posts
+  const picks = [];
+  const step = Math.floor(others.length / count);
+  for (let i = 0; i < count; i++) {
+    picks.push(others[(currentId + i * step - 1) % others.length]);
+  }
+  return picks;
+}
+
+function renderPost(post) {
+  // Update title
+  document.title = post.title + ' — SESE';
+  document.getElementById('breadcrumb-title').textContent = post.title;
+
+  // Build article header
+  const imageHtml = post.image ? `
+    <div class="article-image">
+      <div class="img-frame" style="background-image:url('${post.image}');background-color:#EFDFC2;background-size:contain;background-repeat:no-repeat;">
+        <div class="img-placeholder" style="background:transparent"></div>
+      </div>
+    </div>
+  ` : '';
+
+  const articleHtml = `
+    <div class="article-header">
+      <div class="article-meta">
+        <span>${post.date}</span>
+        <span class="sep">·</span>
+        <span>${post.readtime}</span>
+      </div>
+      <h1>${post.title}</h1>
+      <p class="article-lead">${post.excerpt}</p>
+    </div>
+    ${imageHtml}
+    <div class="article-body">
+      ${post.fullBody}
+    </div>
+    <hr class="article-divider">
+  `;
+
+  document.getElementById('article-container').innerHTML = articleHtml;
+
+  // Render related posts
+  const related = getRelated(post.id, 3);
+  const relatedHtml = `
+    <div class="related-label">More from the journal</div>
+    <div class="related-grid">
+      ${related.map(r => `
+        <a href="blog-post.html?p=${r.id}" class="related-card">
+          <div class="related-card-date">${r.date} · ${r.readtime}</div>
+          <h4>${r.title}</h4>
+          <span class="related-card-link">Read →</span>
+        </a>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('related-section').innerHTML = relatedHtml;
+}
+
+// Init
+const currentPost = POSTS.find(p => p.id === getPostId());
+if (currentPost) {
+  renderPost(currentPost);
+} else {
+  document.getElementById('article-container').innerHTML = '<div style="padding:80px 56px;text-align:center;color:#7A7770;">Post not found. <a href="blog.html" style="border-bottom:1px solid currentColor">Return to Journal →</a></div>';
+}
+</script>
+</body>
+</html>
